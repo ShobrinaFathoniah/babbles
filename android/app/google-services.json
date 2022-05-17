@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "988522380303",
+    "project_id": "babble-shobrinaf",
+    "storage_bucket": "babble-shobrinaf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988522380303:android:af6369735fe2a970a4377a",
+        "android_client_info": {
+          "package_name": "com.babbles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988522380303-te8f1k615a5sr7715glov8hmdl596jkl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.babbles",
+            "certificate_hash": "29bd15b85ae5ba2f29febfe1dd40dc4f5077ad86"
+          }
+        },
+        {
+          "client_id": "988522380303-c6ffjorqpp54fm98ah9rj14iufipv41d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzj3wah0kSHCo-PtnqrLex55qDXlGzT8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "988522380303-c6ffjorqpp54fm98ah9rj14iufipv41d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
