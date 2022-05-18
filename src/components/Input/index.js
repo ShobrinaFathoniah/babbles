@@ -14,7 +14,8 @@ const Input = ({
   onSubmitEditing,
   testID,
   iconName,
-  iconSize,
+  iconSize = 20,
+  keyboardType,
 }) => {
   const passedStyles = Array.isArray(style)
     ? Object.assign({}, ...style)
@@ -37,6 +38,7 @@ const Input = ({
         placeholderTextColor={placeholderTextColor}
         secureTextEntry={secureTextEntry}
         onSubmitEditing={onSubmitEditing}
+        keyboardType={keyboardType}
       />
     </View>
   );
