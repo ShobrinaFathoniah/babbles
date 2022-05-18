@@ -35,6 +35,9 @@
 		8E634E4C60FF478E9B657EC2 /* LibreBaskerville-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0CD41135C37496C9A63B005 /* LibreBaskerville-Italic.ttf */; };
 		D007FEF1010F470DA7B76632 /* LibreBaskerville-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C5CBAA150CD4C1AAE89BDB9 /* LibreBaskerville-Regular.ttf */; };
 		ECD99E4079214FD59E36CCBE /* PassionsConflict-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4624B3A40984765863252DD /* PassionsConflict-Regular.ttf */; };
+		F3F0FD2D94F043A890672D43 /* KleeOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54C23891809B40ACA7ECBFC0 /* KleeOne-Regular.ttf */; };
+		947D976938C34483971C8908 /* KleeOne-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2CE0FFDCB5834F5E89F73106 /* KleeOne-SemiBold.ttf */; };
+		DBEBDC0A733549D39B4EFF5A /* Ole-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FEBAE28BA4A48F883B9D963 /* Ole-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +89,9 @@
 		C0CD41135C37496C9A63B005 /* LibreBaskerville-Italic.ttf */ = {isa = PBXFileReference; name = "LibreBaskerville-Italic.ttf"; path = "../src/assets/Fonts/LibreBaskerville-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		4C5CBAA150CD4C1AAE89BDB9 /* LibreBaskerville-Regular.ttf */ = {isa = PBXFileReference; name = "LibreBaskerville-Regular.ttf"; path = "../src/assets/Fonts/LibreBaskerville-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		E4624B3A40984765863252DD /* PassionsConflict-Regular.ttf */ = {isa = PBXFileReference; name = "PassionsConflict-Regular.ttf"; path = "../src/assets/Fonts/PassionsConflict-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		54C23891809B40ACA7ECBFC0 /* KleeOne-Regular.ttf */ = {isa = PBXFileReference; name = "KleeOne-Regular.ttf"; path = "../src/assets/Fonts/KleeOne-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2CE0FFDCB5834F5E89F73106 /* KleeOne-SemiBold.ttf */ = {isa = PBXFileReference; name = "KleeOne-SemiBold.ttf"; path = "../src/assets/Fonts/KleeOne-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2FEBAE28BA4A48F883B9D963 /* Ole-Regular.ttf */ = {isa = PBXFileReference; name = "Ole-Regular.ttf"; path = "../src/assets/Fonts/Ole-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +221,9 @@
 				C0CD41135C37496C9A63B005 /* LibreBaskerville-Italic.ttf */,
 				4C5CBAA150CD4C1AAE89BDB9 /* LibreBaskerville-Regular.ttf */,
 				E4624B3A40984765863252DD /* PassionsConflict-Regular.ttf */,
+				54C23891809B40ACA7ECBFC0 /* KleeOne-Regular.ttf */,
+				2CE0FFDCB5834F5E89F73106 /* KleeOne-SemiBold.ttf */,
+				2FEBAE28BA4A48F883B9D963 /* Ole-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -337,6 +346,9 @@
 				8E634E4C60FF478E9B657EC2 /* LibreBaskerville-Italic.ttf in Resources */,
 				D007FEF1010F470DA7B76632 /* LibreBaskerville-Regular.ttf in Resources */,
 				ECD99E4079214FD59E36CCBE /* PassionsConflict-Regular.ttf in Resources */,
+				F3F0FD2D94F043A890672D43 /* KleeOne-Regular.ttf in Resources */,
+				947D976938C34483971C8908 /* KleeOne-SemiBold.ttf in Resources */,
+				DBEBDC0A733549D39B4EFF5A /* Ole-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
