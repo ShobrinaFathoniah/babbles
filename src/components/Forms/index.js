@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     padding: moderateScale(10),
     borderRadius: moderateScale(3),
     alignSelf: 'center',
-    backgroundColor: COLORS.purple_500,
+    backgroundColor: COLORS.brown_500,
     margin: moderateScale(10),
     width: moderateScale(260),
   },
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: moderateScale(12),
-    color: COLORS.purple_800,
+    color: COLORS.brown_500,
     marginStart: moderateScale(10),
   },
   containerTextHelper: {
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   title: {
-    color: COLORS.purple_800,
+    color: COLORS.brown_800,
     alignSelf: 'center',
     fontSize: moderateScale(32),
     letterSpacing: moderateScale(0.5),

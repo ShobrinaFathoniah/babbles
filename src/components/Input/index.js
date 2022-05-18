@@ -2,6 +2,7 @@ import {StyleSheet, TextInput, View} from 'react-native';
 import React from 'react';
 import {moderateScale} from 'react-native-size-matters';
 import {COLORS} from '../../helpers';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const Input = ({
   onChangeText,
@@ -9,9 +10,11 @@ const Input = ({
   placeholder,
   secureTextEntry = false,
   style,
-  placeholderTextColor = COLORS.purple_500,
+  placeholderTextColor = COLORS.brown_700,
   onSubmitEditing,
   testID,
+  iconName,
+  iconSize,
 }) => {
   const passedStyles = Array.isArray(style)
     ? Object.assign({}, ...style)
@@ -19,6 +22,12 @@ const Input = ({
 
   return (
     <View style={styles.containerInput}>
+      <View style={styles.containerIcon}>
+        {iconName ? (
+          <Entypo name={iconName} size={iconSize} color={COLORS.brown_100} />
+        ) : null}
+      </View>
+
       <TextInput
         testID={testID}
         style={[styles.input, {...passedStyles}]}
@@ -44,9 +53,14 @@ const styles = StyleSheet.create({
     padding: moderateScale(10),
     borderColor: COLORS.brown_100,
     borderRadius: moderateScale(5),
-    color: COLORS.purple_500,
+    color: COLORS.brown_700,
   },
   containerInput: {
+    flexDirection: 'row',
+    alignItems: 'center',
     alignSelf: 'center',
+  },
+  containerIcon: {
+    marginEnd: moderateScale(5),
   },
 });
