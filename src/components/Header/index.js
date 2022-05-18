@@ -1,9 +1,9 @@
 import {StyleSheet, View, StatusBar} from 'react-native';
 import React from 'react';
 import {moderateScale} from 'react-native-size-matters';
-import {PassionConflict} from '../Fonts';
 import CircleButton from '../CircleButton';
 import {COLORS} from '../../helpers';
+import {KleeOne} from '../Fonts';
 
 const Header = ({
   button = false,
@@ -33,7 +33,7 @@ const Header = ({
   return (
     <View style={styles.page}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.brown_100} />
-      <PassionConflict style={styles.textAppName}>{text}</PassionConflict>
+      <KleeOne style={styles.textAppName}>{text}</KleeOne>
       {button ? (
         <CircleButton nameIcon={nameIcon} onPress={onPressButton} />
       ) : null}
