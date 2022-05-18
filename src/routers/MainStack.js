@@ -31,8 +31,8 @@ const MainStack = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="MainApp"
-        component={MainApp}
+        name="Home"
+        component={Home}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -55,12 +55,22 @@ const MainStack = () => {
         component={RoomChat}
         options={{headerShown: false}}
       />
+      <Stack.Screen
+        name="My Profile"
+        component={MyProfile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };
 
 const MainApp = () => (
-  <Tab.Navigator screenOptions={{headerShown: false}}>
+  <Tab.Navigator screenOptions={{headerShown: false}} initialRouteName="Home">
     <Tab.Screen
       options={{
         tabBarLabel: 'Home',
@@ -75,7 +85,7 @@ const MainApp = () => (
       options={{
         tabBarLabel: 'MyProfile',
         tabBarIcon: ({color, size}) => (
-          <AntDesign name="search1" color={color} size={size} />
+          <AntDesign name="user" color={color} size={size} />
         ),
       }}
       name="MyProfile"
@@ -85,7 +95,7 @@ const MainApp = () => (
       options={{
         tabBarLabel: 'Settings',
         tabBarIcon: ({color, size}) => (
-          <AntDesign name="search1" color={color} size={size} />
+          <AntDesign name="setting" color={color} size={size} />
         ),
       }}
       name="Settings"

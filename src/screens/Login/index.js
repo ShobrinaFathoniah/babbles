@@ -9,7 +9,7 @@ const Login = () => {
   focusedScreen(isFocused, 'Login');
 
   const goToRegister = () => navigate('Register');
-  const signIn = () => navigate('Home');
+  const signIn = () => navigate('MainApp');
 
   return (
     <ScrollView>

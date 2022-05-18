@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
 // import {View, Button} from 'react-native';
 import crashlytics from '@react-native-firebase/crashlytics';

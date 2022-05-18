@@ -1,7 +1,9 @@
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {focusedScreen} from '../../helpers';
+import {MyMenu} from '../../components';
+import {styles} from './styles';
 
 const Home = () => {
   const isFocused = useIsFocused();
@@ -9,7 +11,10 @@ const Home = () => {
 
   return (
     <View>
-      <Text>Home</Text>
+      <View style={styles.menu}>
+        <MyMenu menuName1="My Profile" menuName2="Settings" />
+      </View>
+      <View />
     </View>
   );
 };
