@@ -1,7 +1,7 @@
 import {View, StyleSheet} from 'react-native';
 import React from 'react';
 import * as Progress from 'react-native-progress';
-import {COLORS} from '../../helpers/colors';
+import {COLORS} from '../../helpers';
 
 const LoadingBar = loading => {
   if (loading) {

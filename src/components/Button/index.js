@@ -2,7 +2,7 @@ import {TouchableOpacity} from 'react-native';
 import React from 'react';
 import {moderateScale} from 'react-native-size-matters';
 import {LibreBaskerville} from '../Fonts';
-import {COLORS} from '../../helpers/colors';
+import {COLORS} from '../../helpers';
 
 const Button = ({onPress, text}) => {
   return (

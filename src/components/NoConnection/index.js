@@ -7,7 +7,7 @@ import {
 import {LibreBaskerville} from '../Fonts';
 import {moderateScale} from 'react-native-size-matters';
 import {noConnectionPic} from '../../assets';
-import {COLORS} from '../../helpers/colors';
+import {COLORS} from '../../helpers';
 
 const NoConnection = connection => {
   if (connection) {

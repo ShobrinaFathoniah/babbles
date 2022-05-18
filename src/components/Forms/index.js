@@ -2,7 +2,7 @@ import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {moderateScale} from 'react-native-size-matters';
 import {Courgette, LibreBaskerville} from '../Fonts';
-import {COLORS} from '../../helpers/colors';
+import {COLORS} from '../../helpers';
 import {loginPic, registerPic} from '../../assets';
 
 const Forms = ({type, children, onPressButton, onPressText}) => {

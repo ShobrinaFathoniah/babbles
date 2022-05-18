@@ -30,6 +30,11 @@
 		30F0764836B94DE49719EAAD /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ABEFC993F975419C90D1B66D /* Octicons.ttf */; };
 		51A79CB429E2486EAE2B4D2D /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17E291FA1ACB46A1BB1A0A8D /* SimpleLineIcons.ttf */; };
 		7A5C09CABA884186B1020928 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A74AB21FAF94BBBBAA02AEF /* Zocial.ttf */; };
+		83AF89195860432FB834820E /* Courgette-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B431376021BB486C8A32A3C6 /* Courgette-Regular.ttf */; };
+		EE6DB487768A4B1B856DC7B2 /* LibreBaskerville-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F759294AFC6C433B88C76A8A /* LibreBaskerville-Bold.ttf */; };
+		8E634E4C60FF478E9B657EC2 /* LibreBaskerville-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0CD41135C37496C9A63B005 /* LibreBaskerville-Italic.ttf */; };
+		D007FEF1010F470DA7B76632 /* LibreBaskerville-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C5CBAA150CD4C1AAE89BDB9 /* LibreBaskerville-Regular.ttf */; };
+		ECD99E4079214FD59E36CCBE /* PassionsConflict-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4624B3A40984765863252DD /* PassionsConflict-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +81,11 @@
 		ABEFC993F975419C90D1B66D /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		17E291FA1ACB46A1BB1A0A8D /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		1A74AB21FAF94BBBBAA02AEF /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B431376021BB486C8A32A3C6 /* Courgette-Regular.ttf */ = {isa = PBXFileReference; name = "Courgette-Regular.ttf"; path = "../src/assets/Fonts/Courgette-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F759294AFC6C433B88C76A8A /* LibreBaskerville-Bold.ttf */ = {isa = PBXFileReference; name = "LibreBaskerville-Bold.ttf"; path = "../src/assets/Fonts/LibreBaskerville-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C0CD41135C37496C9A63B005 /* LibreBaskerville-Italic.ttf */ = {isa = PBXFileReference; name = "LibreBaskerville-Italic.ttf"; path = "../src/assets/Fonts/LibreBaskerville-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4C5CBAA150CD4C1AAE89BDB9 /* LibreBaskerville-Regular.ttf */ = {isa = PBXFileReference; name = "LibreBaskerville-Regular.ttf"; path = "../src/assets/Fonts/LibreBaskerville-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E4624B3A40984765863252DD /* PassionsConflict-Regular.ttf */ = {isa = PBXFileReference; name = "PassionsConflict-Regular.ttf"; path = "../src/assets/Fonts/PassionsConflict-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +210,11 @@
 				ABEFC993F975419C90D1B66D /* Octicons.ttf */,
 				17E291FA1ACB46A1BB1A0A8D /* SimpleLineIcons.ttf */,
 				1A74AB21FAF94BBBBAA02AEF /* Zocial.ttf */,
+				B431376021BB486C8A32A3C6 /* Courgette-Regular.ttf */,
+				F759294AFC6C433B88C76A8A /* LibreBaskerville-Bold.ttf */,
+				C0CD41135C37496C9A63B005 /* LibreBaskerville-Italic.ttf */,
+				4C5CBAA150CD4C1AAE89BDB9 /* LibreBaskerville-Regular.ttf */,
+				E4624B3A40984765863252DD /* PassionsConflict-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -317,6 +332,11 @@
 				30F0764836B94DE49719EAAD /* Octicons.ttf in Resources */,
 				51A79CB429E2486EAE2B4D2D /* SimpleLineIcons.ttf in Resources */,
 				7A5C09CABA884186B1020928 /* Zocial.ttf in Resources */,
+				83AF89195860432FB834820E /* Courgette-Regular.ttf in Resources */,
+				EE6DB487768A4B1B856DC7B2 /* LibreBaskerville-Bold.ttf in Resources */,
+				8E634E4C60FF478E9B657EC2 /* LibreBaskerville-Italic.ttf in Resources */,
+				D007FEF1010F470DA7B76632 /* LibreBaskerville-Regular.ttf in Resources */,
+				ECD99E4079214FD59E36CCBE /* PassionsConflict-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

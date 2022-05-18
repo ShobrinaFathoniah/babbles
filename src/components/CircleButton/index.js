@@ -2,7 +2,7 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {moderateScale} from 'react-native-size-matters';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {COLORS} from '../../helpers/colors';
+import {COLORS} from '../../helpers';
 
 const CircleButton = ({
   style,

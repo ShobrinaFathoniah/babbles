@@ -3,7 +3,7 @@ import React from 'react';
 import {moderateScale} from 'react-native-size-matters';
 import {PassionConflict} from '../Fonts';
 import CircleButton from '../CircleButton';
-import {COLORS} from '../../helpers/colors';
+import {COLORS} from '../../helpers';
 
 const Header = ({
   button = false,
