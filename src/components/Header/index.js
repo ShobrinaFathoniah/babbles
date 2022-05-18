@@ -10,13 +10,13 @@ const Header = ({
   nameIcon,
   onPressButton,
   radiusBottom = false,
-  text = 'iRead',
+  text = 'babbles',
 }) => {
   const styles = StyleSheet.create({
     page: {
       flexDirection: 'row',
       alignItems: 'center',
-      backgroundColor: COLORS.purple_100,
+      backgroundColor: COLORS.brown_100,
       justifyContent: button ? 'space-evenly' : 'center',
       borderBottomEndRadius: radiusBottom ? 150 : 0,
       borderBottomStartRadius: radiusBottom ? 150 : 0,
@@ -32,7 +32,7 @@ const Header = ({
 
   return (
     <View style={styles.page}>
-      <StatusBar barStyle="dark-content" backgroundColor={COLORS.purple_100} />
+      <StatusBar barStyle="dark-content" backgroundColor={COLORS.brown_100} />
       <PassionConflict style={styles.textAppName}>{text}</PassionConflict>
       {button ? (
         <CircleButton nameIcon={nameIcon} onPress={onPressButton} />

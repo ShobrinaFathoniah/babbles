@@ -1,9 +1,5 @@
 import {View, Image, StyleSheet} from 'react-native';
 import React from 'react';
-import {
-  heightPercentageToDP,
-  widthPercentageToDP,
-} from 'react-native-responsive-screen';
 import {LibreBaskerville} from '../Fonts';
 import {moderateScale} from 'react-native-size-matters';
 import {noConnectionPic} from '../../assets';
@@ -32,8 +28,8 @@ const styles = StyleSheet.create({
     margin: moderateScale(10),
   },
   image: {
-    width: widthPercentageToDP(70),
-    height: heightPercentageToDP(40),
+    width: moderateScale(70),
+    height: moderateScale(40),
     resizeMode: 'contain',
     alignSelf: 'center',
   },

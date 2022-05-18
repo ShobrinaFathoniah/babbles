@@ -1,10 +1,10 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import MainStack from './MainStack';
+import {navigationRef} from '../helpers';
 // import {useDispatch} from 'react-redux';
 // import NetInfo from '@react-native-community/netinfo';
 // import {setConnection} from '../store/globalAction';
-// import {navigationRef} from '../helpers/navigate';
 
 const Root = () => {
   // const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Root = () => {
   // });
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <MainStack />
     </NavigationContainer>
   );
