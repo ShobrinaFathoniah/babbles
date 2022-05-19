@@ -3,7 +3,7 @@ import React from 'react';
 import {moderateScale} from 'react-native-size-matters';
 import CircleButton from '../CircleButton';
 import {COLORS} from '../../helpers';
-import {KleeOne} from '../Fonts';
+import {Ole} from '../Fonts';
 
 const Header = ({
   button = false,
@@ -22,10 +22,9 @@ const Header = ({
       borderBottomStartRadius: radiusBottom ? 150 : 0,
     },
     textAppName: {
-      fontSize: moderateScale(42),
-      margin: moderateScale(10),
+      fontSize: moderateScale(55),
       color: COLORS.black,
-      letterSpacing: moderateScale(2),
+      letterSpacing: moderateScale(3),
       textAlign: 'center',
     },
   });
@@ -33,7 +32,7 @@ const Header = ({
   return (
     <View style={styles.page}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.brown_100} />
-      <KleeOne style={styles.textAppName}>{text}</KleeOne>
+      <Ole style={styles.textAppName}>{text}</Ole>
       {button ? (
         <CircleButton nameIcon={nameIcon} onPress={onPressButton} />
       ) : null}

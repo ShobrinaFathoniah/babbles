@@ -3,15 +3,11 @@ import {COLORS} from '../../helpers';
 
 export const styles = StyleSheet.create({
   container: {
+    backgroundColor: COLORS.white,
     flex: 1,
   },
-  menu: {
-    alignItems: 'flex-end',
+  menuContainer: {
     backgroundColor: COLORS.brown_100,
-  },
-  floatingIcon: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignSelf: 'flex-end',
+    alignItems: 'flex-end',
   },
 });

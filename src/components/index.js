@@ -7,6 +7,7 @@ import Input from './Input';
 import LoadingBar from './LoadingBar';
 import NoConnection from './NoConnection';
 import MyMenu from './Menu';
+import ListChat from './ListChat';
 
 export {
   Button,
@@ -15,6 +16,7 @@ export {
   MyMenu,
   Forms,
   Header,
+  ListChat,
   Input,
   LoadingBar,
   NoConnection,

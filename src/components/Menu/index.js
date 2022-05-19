@@ -1,19 +1,30 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {Menu, MenuItem, MenuDivider} from 'react-native-material-menu';
-import {navigate} from '../../helpers';
+import {COLORS, navigate} from '../../helpers';
+import Entypo from 'react-native-vector-icons/Entypo';
+import {moderateScale} from 'react-native-size-matters';
 
-export default function MyMenu({menuName1, menuName2}) {
+export default function MyMenu({menuName1, menuName2, clearingChat}) {
   const [visible, setVisible] = useState(false);
+  const clearChat = clearingChat;
 
   const hideMenu = () => {
-    setVisible(false);
-    navigate(menuName1);
+    if (menuName1 === 'Clear Chat') {
+      clearChat();
+    } else {
+      navigate(menuName1);
+      setVisible(false);
+    }
   };
 
   const hideMenu2 = () => {
     setVisible(false);
     navigate(menuName2);
+  };
+
+  const cancelMenu = () => {
+    setVisible(false);
   };
 
   const showMenu = () => setVisible(true);
@@ -22,17 +33,23 @@ export default function MyMenu({menuName1, menuName2}) {
     <View style={styles.menu}>
       <Menu
         visible={visible}
-        anchor={<Text onPress={showMenu}>List Menu</Text>}
-        onRequestClose={hideMenu}>
+        anchor={
+          <Entypo
+            onPress={showMenu}
+            name="dots-three-vertical"
+            size={23}
+            color={COLORS.brown_500}
+          />
+        }
+        onRequestClose={cancelMenu}>
         <MenuItem onPress={hideMenu}>{menuName1 ? menuName1 : null}</MenuItem>
         <MenuItem onPress={hideMenu2}>{menuName2 ? menuName2 : null}</MenuItem>
-        <MenuItem disabled>Disabled item</MenuItem>
-        <MenuDivider />
-        <MenuItem onPress={hideMenu}>Menu item 4</MenuItem>
       </Menu>
     </View>
   );
 }
 const styles = StyleSheet.create({
-  menu: {height: '100%', alignItems: 'center', justifyContent: 'center'},
+  menu: {
+    margin: moderateScale(15),
+  },
 });

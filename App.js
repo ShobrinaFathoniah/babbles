@@ -6,6 +6,8 @@ import crashlytics from '@react-native-firebase/crashlytics';
 // import messaging from '@react-native-firebase/messaging';
 import SplashScreen from 'react-native-splash-screen';
 import Root from './src/routers';
+import {Provider} from 'react-redux';
+import {store} from './src/store';
 
 const App = () => {
   useEffect(() => {
@@ -31,9 +33,9 @@ const App = () => {
   }, []);
 
   return (
-    // <Provider store={store}>
-    <Root />
-    // </Provider>
+    <Provider store={store}>
+      <Root />
+    </Provider>
     // <View>
     //   <View>
     //     <Button
