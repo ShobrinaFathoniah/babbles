@@ -1,14 +1,47 @@
 import {View} from 'react-native';
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {focusedScreen, navigate} from '../../helpers';
 import {ListChat, MyMenu} from '../../components';
 import {styles} from './styles';
 import {FloatingAction} from 'react-native-floating-action';
+import {useDispatch, useSelector} from 'react-redux';
+import {setChoosenUser} from './redux/action';
+import {myDb} from '../../helpers/db';
+import {setIsLoading} from '../../store/globalAction';
 
 const Home = () => {
   const isFocused = useIsFocused();
   focusedScreen(isFocused, 'Home');
+
+  const dispatch = useDispatch();
+  const [data, setData] = useState([]);
+  const {_user = {email: ''}} = useSelector(state => state.user);
+
+  const saveSelectedPerson = payload => {
+    dispatch(setChoosenUser(payload));
+    navigate('RoomChat');
+  };
+
+  const getAllData = useCallback(async () => {
+    try {
+      const res = await myDb.ref('/users').once('value');
+      console.log(res, 'res-hoome');
+      const userList = Object.values(res.val()).filter(
+        val => val.email !== _user.email,
+      );
+      console.log(userList, 'userList-hoome');
+      setData(userList);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch(setIsLoading(false));
+    }
+  }, [_user.email, dispatch]);
+
+  useEffect(() => {
+    getAllData();
+  }, [getAllData]);
 
   const actions = [
     {
@@ -25,24 +58,7 @@ const Home = () => {
     },
   ];
 
-  const dataListChat = {
-    user: [
-      {
-        id: 1,
-        image:
-          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
-        name: 'Akane Chan',
-        chat: 'Hallo this is from hardcode',
-      },
-      {
-        id: 2,
-        image:
-          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
-        name: 'Akane Chan',
-        chat: 'Hallo this is from hardcode',
-      },
-    ],
-  };
+  const dataListChat = data;
 
   return (
     <View style={styles.container}>

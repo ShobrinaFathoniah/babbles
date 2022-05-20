@@ -2,7 +2,6 @@ import {SET_DATA_REGISTER} from './types';
 
 const initialState = {
   dataEmail: '',
-  dataPassword: '',
   dataPhone: '',
 };
 
@@ -12,7 +11,6 @@ export const registerReducer = (state = initialState, action) => {
       return {
         ...state,
         dataEmail: action.email,
-        dataPassword: action.password,
         dataPhone: action.phone,
       };
 

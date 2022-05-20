@@ -16,6 +16,7 @@ const Input = ({
   iconName,
   iconSize = 20,
   keyboardType,
+  onIconPress,
 }) => {
   const passedStyles = Array.isArray(style)
     ? Object.assign({}, ...style)
@@ -25,7 +26,12 @@ const Input = ({
     <View style={styles.containerInput}>
       <View style={styles.containerIcon}>
         {iconName ? (
-          <Entypo name={iconName} size={iconSize} color={COLORS.brown_100} />
+          <Entypo
+            onPress={onIconPress}
+            name={iconName}
+            size={iconSize}
+            color={COLORS.brown_100}
+          />
         ) : null}
       </View>
 

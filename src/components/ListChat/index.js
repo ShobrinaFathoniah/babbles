@@ -12,7 +12,7 @@ import {COLORS, navigate} from '../../helpers';
 
 const ListChat = ({dataListChat}) => {
   const listChatItem = ({item}) => {
-    const idRoomChat = item.id;
+    const idRoomChat = item._id;
 
     return (
       <TouchableOpacity
@@ -24,7 +24,7 @@ const ListChat = ({dataListChat}) => {
         }}>
         <Image source={{uri: item.image}} style={styles.image} />
         <View style={styles.textContainer}>
-          <KleeOne style={styles.textName}>{item.name}</KleeOne>
+          <KleeOne style={styles.textName}>{item.displayName}</KleeOne>
           <KleeOne style={styles.textChat}>{item.chat}</KleeOne>
         </View>
       </TouchableOpacity>
@@ -34,7 +34,7 @@ const ListChat = ({dataListChat}) => {
   return (
     <View>
       <FlatList
-        data={dataListChat.user}
+        data={dataListChat}
         keyExtractor={(_item, index) => index}
         renderItem={listChatItem}
         showsVerticalScrollIndicator={false}

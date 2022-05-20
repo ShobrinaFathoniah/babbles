@@ -50,7 +50,6 @@ export const saveDataRegister = data => {
   return {
     type: SET_DATA_REGISTER,
     email: data.email,
-    password: data.password,
     phone: data.phoneNumber,
   };
 };
