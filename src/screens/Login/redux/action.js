@@ -6,6 +6,7 @@ import authProvider from '@react-native-firebase/auth';
 import messagingProvider from '@react-native-firebase/messaging';
 import {navigate} from '../../../helpers';
 import {myDb} from '../../../helpers/db';
+import {setDataUser} from '../../../store/userAction';
 
 export const sendDataLogin = (email, password) => async dispatch => {
   dispatch(setIsLoading(true));
@@ -40,17 +41,4 @@ export const sendDataLogin = (email, password) => async dispatch => {
 
     dispatch(setIsLoading(false));
   }
-};
-
-export const setDataUser = data => {
-  return {
-    type: SET_DATA_LOGIN,
-    data: data,
-  };
-};
-
-export const logOut = () => {
-  return {
-    type: LOG_OUT,
-  };
 };

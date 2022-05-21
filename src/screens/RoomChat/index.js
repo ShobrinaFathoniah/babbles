@@ -1,7 +1,7 @@
 import {View, Text} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
-import {focusedScreen} from '../../helpers';
+import {COLORS, focusedScreen} from '../../helpers';
 import {GiftedChat} from 'react-native-gifted-chat';
 import {styles} from './styles';
 import {Header, MyMenu} from '../../components';
@@ -10,32 +10,30 @@ import {useSelector} from 'react-redux';
 import axios from 'axios';
 import {fcmUrl, FIREBASE_API_KEY} from '../../helpers/apiURL';
 
-const RoomChat = ({route}) => {
+const RoomChat = () => {
   const isFocused = useIsFocused();
   focusedScreen(isFocused, 'RoomChat');
 
-  const {params} = route.params;
-  const idRoomChat = params.idRoomChat;
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState({});
-  const {_user} = useSelector(state => state.user);
+  const {_user, selectedUser} = useSelector(state => state.user);
 
   const createIntialData = useCallback(() => {
     try {
-      myDb.ref(`users/${idRoomChat}`).on('value', res => {
+      myDb.ref(`users/${selectedUser._id}`).on('value', res => {
         const userData = res.val();
-        if (userData.chatRoom) {
+        if (userData?.roomChat) {
           setUser(userData);
         } else {
           setUser(prevState => {
-            return {...prevState, ...userData, chatRoom: []};
+            return {...prevState, ...userData, roomChat: []};
           });
         }
       });
     } catch (error) {
       console.log(error);
     }
-  }, [idRoomChat]);
+  }, [selectedUser._id]);
 
   useEffect(() => {
     createIntialData();
@@ -60,21 +58,21 @@ const RoomChat = ({route}) => {
     async (sendedMessage = []) => {
       let isUpdating = true;
       await myDb.ref(`users/${_user._id}`).update({
-        chatRoom: [
-          ...user.chatRoom,
+        roomChat: [
+          ...user.roomChat,
           {
             ...sendedMessage[0],
-            idx: user.chatRoom?.length + 1,
+            idx: user.roomChat?.length + 1,
           },
         ],
       });
 
-      await myDb.ref(`users/${idRoomChat}`).update({
-        chatRoom: [
-          ...user.chatRoom,
+      await myDb.ref(`users/${selectedUser._id}`).update({
+        roomChat: [
+          ...user.roomChat,
           {
             ...sendedMessage[0],
-            idx: user.chatRoom.length + 1,
+            idx: user.roomChat.length + 1,
           },
         ],
       });
@@ -82,7 +80,7 @@ const RoomChat = ({route}) => {
       isUpdating = false;
       if (!isUpdating) {
         const body = {
-          to: _user.notifToken,
+          to: selectedUser.notifToken,
           notification: {
             body: sendedMessage[0].text,
             title: `New Messages from ${_user.displayName}`,
@@ -100,7 +98,13 @@ const RoomChat = ({route}) => {
         });
       }
     },
-    [user.chatRoom, _user._id, _user.displayName, _user.notifToken, idRoomChat],
+    [
+      user.roomChat,
+      _user._id,
+      _user.displayName,
+      selectedUser.notifToken,
+      selectedUser._id,
+    ],
   );
 
   const clearChat = () => {
@@ -117,11 +121,18 @@ const RoomChat = ({route}) => {
         />
       </View>
       <GiftedChat
-        messages={messages}
-        onSend={messages => onSend(messages)}
-        user={{
-          _id: 1,
+        messages={user?.roomChat?.reverse()}
+        onSend={sendedMessage => {
+          onSend(sendedMessage);
         }}
+        optionTintColor="red"
+        user={{
+          _id: _user._id,
+          name: _user.displayName,
+          avatar:
+            user.photoUrl ?? 'https://randomuser.me/api/portraits/men/36.jpg',
+        }}
+        messagesContainerStyle={{backgroundColor: COLORS.white}}
       />
     </View>
   );

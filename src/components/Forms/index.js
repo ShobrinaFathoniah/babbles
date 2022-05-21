@@ -47,14 +47,11 @@ const Forms = ({type, children, onPressButton, onPressText}) => {
   };
 
   return (
-    <View testID="FormComponent">
+    <View>
       <Courgette style={styles.title}>{type}</Courgette>
       {image()}
       {children}
-      <TouchableOpacity
-        testID="ButtonLoginRegis"
-        style={styles.button}
-        onPress={onPressButton}>
+      <TouchableOpacity style={styles.button} onPress={onPressButton}>
         <LibreBaskerville style={styles.buttonText}>{type}</LibreBaskerville>
       </TouchableOpacity>
       {helpText(type)}

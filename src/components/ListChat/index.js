@@ -10,22 +10,16 @@ import {KleeOne} from '../Fonts';
 import {moderateScale} from 'react-native-size-matters';
 import {COLORS, navigate} from '../../helpers';
 
-const ListChat = ({dataListChat}) => {
+const ListChat = ({dataListChat, onPressChat}) => {
   const listChatItem = ({item}) => {
     const idRoomChat = item._id;
 
     return (
-      <TouchableOpacity
-        style={styles.listChatContainer}
-        onPress={() => {
-          navigate('RoomChat', {
-            params: {idRoomChat},
-          });
-        }}>
-        <Image source={{uri: item.image}} style={styles.image} />
+      <TouchableOpacity style={styles.listChatContainer} onPress={onPressChat}>
+        <Image source={{uri: item.user.avatar}} style={styles.image} />
         <View style={styles.textContainer}>
-          <KleeOne style={styles.textName}>{item.displayName}</KleeOne>
-          <KleeOne style={styles.textChat}>{item.chat}</KleeOne>
+          <KleeOne style={styles.textName}>{item.user.name}</KleeOne>
+          <KleeOne style={styles.textChat}>{item.text}</KleeOne>
         </View>
       </TouchableOpacity>
     );
@@ -34,7 +28,7 @@ const ListChat = ({dataListChat}) => {
   return (
     <View>
       <FlatList
-        data={dataListChat}
+        data={dataListChat?.roomChat}
         keyExtractor={(_item, index) => index}
         renderItem={listChatItem}
         showsVerticalScrollIndicator={false}

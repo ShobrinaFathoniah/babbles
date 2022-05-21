@@ -1,1 +1,0 @@
-export const SET_DATA_REGISTER = 'SET_DATA_REGISTER';

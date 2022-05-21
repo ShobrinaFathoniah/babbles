@@ -16,7 +16,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
-  const {_user = {email: ''}} = useSelector(state => state.user);
+  const {_user = {_id: ''}} = useSelector(state => state.user);
 
   const saveSelectedPerson = payload => {
     dispatch(setChoosenUser(payload));
@@ -25,19 +25,15 @@ const Home = () => {
 
   const getAllData = useCallback(async () => {
     try {
-      const res = await myDb.ref('/users').once('value');
+      const res = await myDb.ref(`/users/${_user._id}`).once('value');
       console.log(res, 'res-hoome');
-      const userList = Object.values(res.val()).filter(
-        val => val.email !== _user.email,
-      );
-      console.log(userList, 'userList-hoome');
-      setData(userList);
+      setData(res._snapshot.value);
     } catch (error) {
       console.log(error);
     } finally {
       dispatch(setIsLoading(false));
     }
-  }, [_user.email, dispatch]);
+  }, [_user._id, dispatch]);
 
   useEffect(() => {
     getAllData();
@@ -58,7 +54,7 @@ const Home = () => {
     },
   ];
 
-  const dataListChat = data;
+  // const dataListChat = data;
 
   return (
     <View style={styles.container}>
@@ -66,7 +62,7 @@ const Home = () => {
         <MyMenu menuName1="My Profile" menuName2="Settings" />
       </View>
       <View>
-        <ListChat dataListChat={dataListChat} />
+        <ListChat onPressChat={saveSelectedPerson} dataListChat={data} />
       </View>
       <View style={styles.floatingIcon}>
         <FloatingAction

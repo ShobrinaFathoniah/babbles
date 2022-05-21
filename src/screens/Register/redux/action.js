@@ -6,6 +6,7 @@ import authProvider from '@react-native-firebase/auth';
 import messagingProvider from '@react-native-firebase/messaging';
 import {navigate} from '../../../helpers';
 import {myDb} from '../../../helpers/db';
+import {setDataUser} from '../../../store/userAction';
 
 export const sendDataRegister = (name, email, password) => async dispatch => {
   dispatch(setIsLoading(true));
@@ -27,15 +28,17 @@ export const sendDataRegister = (name, email, password) => async dispatch => {
         const payload = {
           displayName: name,
           email: res.user.email,
-          phoneNumber: res.user.phoneNumber,
-          photoURL: res.user.photoURL,
-          contact: [],
-          roomChat: [],
+          phoneNumber: res.user.phoneNumber ? res.user.phoneNumber : 0,
+          photoURL: res.user.photoURL
+            ? res.user.photoURL
+            : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+          contact: '',
+          roomChat: '',
           _id: res.user.uid,
           notifToken: token,
         };
         await myDb.ref(`users/${res.user.uid}`).set(payload);
-        dispatch(saveDataRegister(payload));
+        dispatch(setDataUser(payload));
         navigate('Home');
       }
     }
@@ -44,12 +47,4 @@ export const sendDataRegister = (name, email, password) => async dispatch => {
 
     dispatch(setIsLoading(false));
   }
-};
-
-export const saveDataRegister = data => {
-  return {
-    type: SET_DATA_REGISTER,
-    email: data.email,
-    phone: data.phoneNumber,
-  };
 };
