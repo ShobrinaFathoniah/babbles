@@ -3,6 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import React from 'react';
 import {
+  AddPC,
   GroupChat,
   Home,
   ListKontak,
@@ -63,6 +64,11 @@ const MainStack = () => {
       <Stack.Screen
         name="Settings"
         component={Settings}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="AddPC"
+        component={AddPC}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

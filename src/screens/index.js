@@ -7,6 +7,7 @@ import Profile from './Profile';
 import Register from './Register';
 import RoomChat from './RoomChat';
 import Settings from './Settings';
+import AddPC from './AddPC';
 
 export {
   GroupChat,
@@ -18,4 +19,5 @@ export {
   Register,
   RoomChat,
   Settings,
+  AddPC,
 };

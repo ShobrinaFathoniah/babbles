@@ -26,8 +26,9 @@ const Home = () => {
   const getAllData = useCallback(async () => {
     try {
       const res = await myDb.ref(`/users/${_user._id}`).once('value');
-      console.log(res, 'res-hoome');
+      console.log(res, 'res-home');
       setData(res._snapshot.value);
+      // console.log(data, 'data');
     } catch (error) {
       console.log(error);
     } finally {
@@ -62,14 +63,16 @@ const Home = () => {
         <MyMenu menuName1="My Profile" menuName2="Settings" />
       </View>
       <View>
-        <ListChat onPressChat={saveSelectedPerson} dataListChat={data} />
+        <ListChat
+          onPressChat={saveSelectedPerson}
+          dataListChat={data.roomChat}
+        />
       </View>
       <View style={styles.floatingIcon}>
         <FloatingAction
           actions={actions}
           onPressItem={name => {
-            // navigate(name)
-            console.log(name);
+            navigate(name);
           }}
         />
       </View>

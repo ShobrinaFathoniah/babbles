@@ -12,7 +12,8 @@ import {COLORS, navigate} from '../../helpers';
 
 const ListChat = ({dataListChat, onPressChat}) => {
   const listChatItem = ({item}) => {
-    const idRoomChat = item._id;
+    // const idRoomChat = item._id;
+    console.log();
 
     return (
       <TouchableOpacity style={styles.listChatContainer} onPress={onPressChat}>
