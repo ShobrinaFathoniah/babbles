@@ -1,10 +1,10 @@
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {COLORS, focusedScreen} from '../../helpers';
 import {GiftedChat} from 'react-native-gifted-chat';
 import {styles} from './styles';
-import {Header, MyMenu} from '../../components';
+import {MyMenu} from '../../components';
 import {myDb} from '../../helpers/db';
 import {useSelector} from 'react-redux';
 import axios from 'axios';
@@ -14,13 +14,14 @@ const RoomChat = () => {
   const isFocused = useIsFocused();
   focusedScreen(isFocused, 'RoomChat');
 
-  const [messages, setMessages] = useState([]);
+  // const [messages, setMessages] = useState([]);
   const [user, setUser] = useState({});
   const {_user, selectedUser} = useSelector(state => state.user);
+  console.log(selectedUser.user._id, 'selected id');
 
   const createIntialData = useCallback(() => {
     try {
-      myDb.ref(`users/${selectedUser._id}`).on('value', res => {
+      myDb.ref(`users/${selectedUser.user._id}`).on('value', res => {
         const userData = res.val();
         if (userData?.roomChat) {
           setUser(userData);
@@ -33,7 +34,7 @@ const RoomChat = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [selectedUser._id]);
+  }, [selectedUser.user._id]);
 
   useEffect(() => {
     createIntialData();
@@ -62,17 +63,17 @@ const RoomChat = () => {
           ...user.roomChat,
           {
             ...sendedMessage[0],
-            idx: user.roomChat?.length + 1,
+            _id: selectedUser.user._id,
           },
         ],
       });
 
-      await myDb.ref(`users/${selectedUser._id}`).update({
+      await myDb.ref(`users/${selectedUser.user._id}`).update({
         roomChat: [
           ...user.roomChat,
           {
             ...sendedMessage[0],
-            idx: user.roomChat.length + 1,
+            _id: selectedUser.user._id,
           },
         ],
       });
@@ -80,7 +81,7 @@ const RoomChat = () => {
       isUpdating = false;
       if (!isUpdating) {
         const body = {
-          to: selectedUser.notifToken,
+          to: user.notifToken,
           notification: {
             body: sendedMessage[0].text,
             title: `New Messages from ${_user.displayName}`,
@@ -102,10 +103,12 @@ const RoomChat = () => {
       user.roomChat,
       _user._id,
       _user.displayName,
-      selectedUser.notifToken,
-      selectedUser._id,
+      user.notifToken,
+      selectedUser.user._id,
     ],
   );
+
+  console.log(user.notifToken);
 
   const clearChat = () => {
     console.log('Clearchat button press');

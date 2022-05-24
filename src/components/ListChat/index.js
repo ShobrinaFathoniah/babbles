@@ -6,24 +6,38 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import {KleeOne} from '../Fonts';
+import {KleeOne, LibreBaskerville} from '../Fonts';
 import {moderateScale} from 'react-native-size-matters';
+import {useDispatch, useSelector} from 'react-redux';
 import {COLORS, navigate} from '../../helpers';
+import {setChoosenUser} from '../../screens/Home/redux/action';
 
 const ListChat = ({dataListChat, onPressChat}) => {
+  const {_user = {_id: ''}} = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  const saveSelectedPerson = payload => {
+    dispatch(setChoosenUser(payload));
+    navigate('RoomChat');
+  };
+
   const listChatItem = ({item}) => {
     // const idRoomChat = item._id;
-    console.log();
-
-    return (
-      <TouchableOpacity style={styles.listChatContainer} onPress={onPressChat}>
-        <Image source={{uri: item.user.avatar}} style={styles.image} />
-        <View style={styles.textContainer}>
-          <KleeOne style={styles.textName}>{item.user.name}</KleeOne>
-          <KleeOne style={styles.textChat}>{item.text}</KleeOne>
-        </View>
-      </TouchableOpacity>
-    );
+    if (item.user._id !== _user._id) {
+      return (
+        <TouchableOpacity
+          style={styles.listChatContainer}
+          onPress={() => saveSelectedPerson(item)}>
+          <Image source={{uri: item.user.avatar}} style={styles.image} />
+          <View style={styles.textContainer}>
+            <KleeOne style={styles.textName}>{item.user.name}</KleeOne>
+            <KleeOne style={styles.textChat}>{item.text}</KleeOne>
+          </View>
+        </TouchableOpacity>
+      );
+    } else {
+      return null;
+    }
   };
 
   return (

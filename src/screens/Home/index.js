@@ -6,7 +6,6 @@ import {ListChat, MyMenu} from '../../components';
 import {styles} from './styles';
 import {FloatingAction} from 'react-native-floating-action';
 import {useDispatch, useSelector} from 'react-redux';
-import {setChoosenUser} from './redux/action';
 import {myDb} from '../../helpers/db';
 import {setIsLoading} from '../../store/globalAction';
 
@@ -17,11 +16,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const {_user = {_id: ''}} = useSelector(state => state.user);
-
-  const saveSelectedPerson = payload => {
-    dispatch(setChoosenUser(payload));
-    navigate('RoomChat');
-  };
 
   const getAllData = useCallback(async () => {
     try {
@@ -63,10 +57,7 @@ const Home = () => {
         <MyMenu menuName1="My Profile" menuName2="Settings" />
       </View>
       <View>
-        <ListChat
-          onPressChat={saveSelectedPerson}
-          dataListChat={data.roomChat}
-        />
+        <ListChat dataListChat={data} />
       </View>
       <View style={styles.floatingIcon}>
         <FloatingAction
