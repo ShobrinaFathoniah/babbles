@@ -1,8 +1,7 @@
-import {View, FlatList, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 import React, {useEffect, useCallback, useState} from 'react';
-import {Header} from '../../components';
+import {Header, ListContacts} from '../../components';
 import {useDispatch, useSelector} from 'react-redux';
-import {LibreBaskerville} from '../../components/Fonts';
 import {myDb} from '../../helpers/db';
 import {setIsLoading} from '../../store/globalAction';
 
@@ -27,21 +26,10 @@ const AddPC = () => {
     getAllData();
   }, [getAllData]);
 
-  const listContact = ({item}) => {
-    return (
-      <TouchableOpacity>
-        <LibreBaskerville>{item.idPerson}</LibreBaskerville>
-      </TouchableOpacity>
-    );
-  };
   return (
     <View>
       <Header />
-      <FlatList
-        keyExtractor={(_item, index) => index}
-        data={data}
-        renderItem={listContact}
-      />
+      <ListContacts data={data} />
     </View>
   );
 };

@@ -5,8 +5,8 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
-import {KleeOne, LibreBaskerville} from '../Fonts';
+import React, {useState} from 'react';
+import {KleeOne} from '../Fonts';
 import {moderateScale} from 'react-native-size-matters';
 import {useDispatch, useSelector} from 'react-redux';
 import {COLORS, navigate} from '../../helpers';
@@ -14,6 +14,8 @@ import {setChoosenUser} from '../../screens/Home/redux/action';
 
 const ListChat = ({dataListChat, onPressChat}) => {
   const {_user = {_id: ''}} = useSelector(state => state.user);
+  const [dataChat, setDataChat] = useState([]);
+  const [listIDChat, setListIDChat] = useState([]);
   const dispatch = useDispatch();
 
   const saveSelectedPerson = payload => {
@@ -23,21 +25,23 @@ const ListChat = ({dataListChat, onPressChat}) => {
 
   const listChatItem = ({item}) => {
     // const idRoomChat = item._id;
-    if (item.user._id !== _user._id) {
-      return (
-        <TouchableOpacity
-          style={styles.listChatContainer}
-          onPress={() => saveSelectedPerson(item)}>
-          <Image source={{uri: item.user.avatar}} style={styles.image} />
-          <View style={styles.textContainer}>
-            <KleeOne style={styles.textName}>{item.user.name}</KleeOne>
-            <KleeOne style={styles.textChat}>{item.text}</KleeOne>
-          </View>
-        </TouchableOpacity>
-      );
-    } else {
-      return null;
-    }
+    // if (item.user._id !== _user._id) {
+    console.log(item.chat, 'item');
+    return (
+      <TouchableOpacity
+        style={styles.listChatContainer}
+        onPress={() => saveSelectedPerson(item)}>
+        {/* <Image source={{uri: item.user.avatar}} style={styles.image} />
+        <View style={styles.textContainer}>
+          <KleeOne style={styles.textName}>{item.user.name}</KleeOne>
+          <KleeOne style={styles.textChat}>{item.text}</KleeOne> */}
+        <KleeOne style={styles.textChat}>{item.chat}</KleeOne>
+        {/* </View> */}
+      </TouchableOpacity>
+    );
+    // } else {
+    //   return null;
+    // }
   };
 
   return (

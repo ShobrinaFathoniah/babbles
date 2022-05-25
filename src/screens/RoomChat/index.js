@@ -14,10 +14,10 @@ const RoomChat = () => {
   const isFocused = useIsFocused();
   focusedScreen(isFocused, 'RoomChat');
 
-  // const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([]);
   const [user, setUser] = useState({});
   const {_user, selectedUser} = useSelector(state => state.user);
-  console.log(selectedUser.user._id, 'selected id');
+  const idRoomChat = `${_user._id}${selectedUser.user._id}`;
 
   const createIntialData = useCallback(() => {
     try {
@@ -25,16 +25,68 @@ const RoomChat = () => {
         const userData = res.val();
         if (userData?.roomChat) {
           setUser(userData);
+          myDb
+            .ref(`users/${selectedUser.user._id}/roomChat/${idRoomChat}`)
+            .on('value', result => {
+              setMessages(result.val());
+            });
         } else {
           setUser(prevState => {
             return {...prevState, ...userData, roomChat: []};
+          });
+
+          myDb.ref(`users/${selectedUser.user._id}/roomChat`).set({
+            listIdChatRoom: [idRoomChat],
+          });
+
+          myDb.ref(`users/${_user._id}/roomChat/`).set({
+            listIdChatRoom: [idRoomChat],
+          });
+
+          myDb
+            .ref(`users/${selectedUser.user._id}/roomChat/${idRoomChat}`)
+            .set({
+              chat: [
+                {
+                  _id: `${idRoomChat}`,
+                  text: `Helloo ${idRoomChat}`,
+                  createdAt: new Date(),
+                  user: {
+                    _id: `${selectedUser.user._id}`,
+                    name: `${selectedUser.displayName}`,
+                    avatar: `${selectedUser.photoUrl}`,
+                  },
+                },
+              ],
+            });
+          myDb.ref(`users/${_user._id}/roomChat/${idRoomChat}`).set({
+            chat: [
+              {
+                _id: `${idRoomChat}`,
+                text: `Helloo ${idRoomChat}`,
+                createdAt: new Date(),
+                user: {
+                  _id: `${_user._id}`,
+                  name: `${_user.displayName}`,
+                  avatar: `${_user.photoURL}`,
+                },
+              },
+            ],
           });
         }
       });
     } catch (error) {
       console.log(error);
     }
-  }, [selectedUser.user._id]);
+  }, [
+    selectedUser.user._id,
+    selectedUser.displayName,
+    selectedUser.photoUrl,
+    idRoomChat,
+    _user._id,
+    _user.displayName,
+    _user.photoURL,
+  ]);
 
   useEffect(() => {
     createIntialData();
@@ -58,25 +110,27 @@ const RoomChat = () => {
   const onSend = useCallback(
     async (sendedMessage = []) => {
       let isUpdating = true;
-      await myDb.ref(`users/${_user._id}`).update({
-        roomChat: [
-          ...user.roomChat,
+      await myDb.ref(`users/${_user._id}/roomChat/${idRoomChat}`).update({
+        chat: [
+          ...messages.chat,
           {
             ...sendedMessage[0],
-            _id: selectedUser.user._id,
+            _id: idRoomChat,
           },
         ],
       });
 
-      await myDb.ref(`users/${selectedUser.user._id}`).update({
-        roomChat: [
-          ...user.roomChat,
-          {
-            ...sendedMessage[0],
-            _id: selectedUser.user._id,
-          },
-        ],
-      });
+      await myDb
+        .ref(`users/${selectedUser.user._id}/roomChat/${idRoomChat}`)
+        .update({
+          chat: [
+            ...messages.chat,
+            {
+              ...sendedMessage[0],
+              _id: idRoomChat,
+            },
+          ],
+        });
 
       isUpdating = false;
       if (!isUpdating) {
@@ -98,17 +152,17 @@ const RoomChat = () => {
           },
         });
       }
+      console.log(sendedMessage, 'sendedMessage');
     },
     [
-      user.roomChat,
+      messages,
       _user._id,
       _user.displayName,
       user.notifToken,
       selectedUser.user._id,
+      idRoomChat,
     ],
   );
-
-  console.log(user.notifToken);
 
   const clearChat = () => {
     console.log('Clearchat button press');
@@ -124,14 +178,16 @@ const RoomChat = () => {
         />
       </View>
       <GiftedChat
-        messages={user?.roomChat?.reverse()}
+        messages={messages?.chat?.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        })}
         onSend={sendedMessage => {
           onSend(sendedMessage);
         }}
         optionTintColor="red"
         user={{
-          _id: _user._id,
-          name: _user.displayName,
+          _id: user._id,
+          name: user.displayName,
           avatar:
             user.photoUrl ?? 'https://randomuser.me/api/portraits/men/36.jpg',
         }}

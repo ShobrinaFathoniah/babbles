@@ -20,9 +20,8 @@ const Home = () => {
   const getAllData = useCallback(async () => {
     try {
       const res = await myDb.ref(`/users/${_user._id}`).once('value');
-      console.log(res, 'res-home');
+      console.log(res._snapshot.value.roomChat, 'res-home');
       setData(res._snapshot.value);
-      // console.log(data, 'data');
     } catch (error) {
       console.log(error);
     } finally {

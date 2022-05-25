@@ -7,6 +7,7 @@ import Input from './Input';
 import LoadingBar from './LoadingBar';
 import NoConnection from './NoConnection';
 import MyMenu from './Menu';
+import ListContacts from './ListContacts';
 import ListChat from './ListChat';
 
 export {
@@ -20,4 +21,5 @@ export {
   Input,
   LoadingBar,
   NoConnection,
+  ListContacts,
 };
