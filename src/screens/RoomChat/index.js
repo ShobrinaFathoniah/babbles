@@ -18,6 +18,7 @@ const RoomChat = () => {
   const [user, setUser] = useState({});
   const {_user, selectedUser} = useSelector(state => state.user);
   const idRoomChat = `${_user._id}${selectedUser.user._id}`;
+  const idRoomChat2 = `${selectedUser.user._id}${_user._id}`;
 
   const createIntialData = useCallback(() => {
     try {
@@ -36,7 +37,7 @@ const RoomChat = () => {
           });
 
           myDb.ref(`users/${selectedUser.user._id}/roomChat`).set({
-            listIdChatRoom: [idRoomChat],
+            listIdChatRoom: [idRoomChat2],
           });
 
           myDb.ref(`users/${_user._id}/roomChat/`).set({
@@ -44,12 +45,12 @@ const RoomChat = () => {
           });
 
           myDb
-            .ref(`users/${selectedUser.user._id}/roomChat/${idRoomChat}`)
+            .ref(`users/${selectedUser.user._id}/roomChat/${idRoomChat2}`)
             .set({
               chat: [
                 {
-                  _id: `${idRoomChat}`,
-                  text: `Helloo ${idRoomChat}`,
+                  _id: `${idRoomChat2}`,
+                  text: `Helloo ${idRoomChat2}`,
                   createdAt: new Date(),
                   user: {
                     _id: `${selectedUser.user._id}`,
@@ -86,6 +87,7 @@ const RoomChat = () => {
     _user._id,
     _user.displayName,
     _user.photoURL,
+    idRoomChat2,
   ]);
 
   useEffect(() => {
