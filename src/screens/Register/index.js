@@ -24,8 +24,8 @@ const Register = () => {
   const goToLogin = () => navigate('Login');
   const registerUser = () => dispatch(sendDataRegister(name, email, password));
 
-  const checkSamePasswordView = () => {
-    return checkSamePassword(password, password1) ? (
+  const checkSamePasswordView = (a, b) => {
+    return checkSamePassword(a, b) ? (
       <View>
         <LibreBaskerville>
           The Password is not same, Please Check Again!
@@ -65,7 +65,7 @@ const Register = () => {
           placeholder="Password"
           secureTextEntry={showPassword}
         />
-        {checkSamePasswordView}
+        {checkSamePasswordView(password, password1)}
         <Input
           onIconPress={() =>
             showPassword1 ? setShowPassword1(false) : setShowPassword1(true)

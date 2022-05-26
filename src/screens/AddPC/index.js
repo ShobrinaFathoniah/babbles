@@ -4,6 +4,7 @@ import {Header, ListContacts} from '../../components';
 import {useDispatch, useSelector} from 'react-redux';
 import {myDb} from '../../helpers/db';
 import {setIsLoading} from '../../store/globalAction';
+import {navigate} from '../../helpers';
 
 const AddPC = () => {
   const [data, setData] = useState([]);
@@ -22,13 +23,15 @@ const AddPC = () => {
     }
   }, [_user._id, dispatch]);
 
+  const onPressButton = () => navigate('AddByUsername');
+
   useEffect(() => {
     getAllData();
   }, [getAllData]);
 
   return (
     <View>
-      <Header />
+      <Header button={true} nameIcon="plus" onPressButton={onPressButton} />
       <ListContacts data={data} />
     </View>
   );
