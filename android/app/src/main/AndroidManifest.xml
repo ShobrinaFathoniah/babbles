@@ -11,7 +11,7 @@
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
-      android:icon="@mipmap/logo_babbles"
+      android:icon="@mipmap/logo_babbles_foreground"
       android:roundIcon="@mipmap/logo_babbles_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
