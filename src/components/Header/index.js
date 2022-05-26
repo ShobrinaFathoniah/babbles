@@ -27,6 +27,9 @@ const Header = ({
       letterSpacing: moderateScale(3),
       textAlign: 'center',
     },
+    button: {
+      marginStart: moderateScale(100),
+    },
   });
 
   return (
@@ -34,7 +37,11 @@ const Header = ({
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.brown_100} />
       <Ole style={styles.textAppName}>{text}</Ole>
       {button ? (
-        <CircleButton nameIcon={nameIcon} onPress={onPressButton} />
+        <CircleButton
+          style={styles.button}
+          nameIcon={nameIcon}
+          onPress={onPressButton}
+        />
       ) : null}
     </View>
   );

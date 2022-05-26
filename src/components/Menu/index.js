@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Menu, MenuItem, MenuDivider} from 'react-native-material-menu';
+import {Menu, MenuItem} from 'react-native-material-menu';
 import {COLORS, navigate} from '../../helpers';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {moderateScale} from 'react-native-size-matters';

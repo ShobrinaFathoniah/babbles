@@ -1,21 +1,15 @@
-import {
-  StyleSheet,
-  FlatList,
-  View,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
-import React, {useState} from 'react';
+import {StyleSheet, FlatList, View, TouchableOpacity} from 'react-native';
+import React from 'react';
 import {KleeOne} from '../Fonts';
 import {moderateScale} from 'react-native-size-matters';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {COLORS, navigate} from '../../helpers';
 import {setChoosenUser} from '../../screens/Home/redux/action';
 
 const ListChat = ({dataListChat, onPressChat}) => {
-  const {_user = {_id: ''}} = useSelector(state => state.user);
-  const [dataChat, setDataChat] = useState([]);
-  const [listIDChat, setListIDChat] = useState([]);
+  // const {_user = {_id: ''}} = useSelector(state => state.user);
+  // const [dataChat, setDataChat] = useState([]);
+  // const [listIDChat, setListIDChat] = useState([]);
   const dispatch = useDispatch();
 
   const saveSelectedPerson = payload => {

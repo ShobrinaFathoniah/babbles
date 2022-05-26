@@ -9,6 +9,7 @@ import RoomChat from './RoomChat';
 import Settings from './Settings';
 import AddPC from './AddPC';
 import AddByUsername from './AddByUsername';
+import QRCode from './QRCode';
 
 export {
   GroupChat,
@@ -22,4 +23,5 @@ export {
   Settings,
   AddPC,
   AddByUsername,
+  QRCode,
 };

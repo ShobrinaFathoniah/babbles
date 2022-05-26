@@ -1,7 +1,5 @@
-// import axios from 'axios';
 import {Alert} from 'react-native';
 import {setIsLoading} from '../../../store/globalAction';
-import {LOG_OUT, SET_DATA_LOGIN} from './types';
 import authProvider from '@react-native-firebase/auth';
 import messagingProvider from '@react-native-firebase/messaging';
 import {navigate} from '../../../helpers';

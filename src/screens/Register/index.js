@@ -2,8 +2,8 @@ import {ScrollView, View} from 'react-native';
 import React, {useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {focusedScreen, navigate} from '../../helpers';
-import {Forms, Header, Input} from '../../components';
-import {useDispatch} from 'react-redux';
+import {Forms, Header, Input, LoadingBar} from '../../components';
+import {useDispatch, useSelector} from 'react-redux';
 import {sendDataRegister} from './redux/action';
 import {checkSamePassword} from '../../helpers/checkSamePassword';
 import {LibreBaskerville} from '../../components/Fonts';
@@ -18,6 +18,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [showPassword, setShowPassword] = useState(true);
   const [showPassword1, setShowPassword1] = useState(true);
+  const {isLoading} = useSelector(state => state.global);
 
   const dispatch = useDispatch();
 
@@ -77,6 +78,7 @@ const Register = () => {
           iconSize={20}
           secureTextEntry={showPassword1}
         />
+        {LoadingBar(isLoading)}
       </Forms>
     </ScrollView>
   );

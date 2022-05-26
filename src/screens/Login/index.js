@@ -2,8 +2,8 @@ import {ScrollView} from 'react-native';
 import React, {useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {focusedScreen, navigate} from '../../helpers';
-import {Forms, Header, Input} from '../../components';
-import {useDispatch} from 'react-redux';
+import {Forms, Header, Input, LoadingBar} from '../../components';
+import {useDispatch, useSelector} from 'react-redux';
 import {sendDataLogin} from './redux/action';
 
 const Login = () => {
@@ -12,6 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(true);
+  const {isLoading} = useSelector(state => state.global);
 
   const dispatch = useDispatch();
 
@@ -40,6 +41,7 @@ const Login = () => {
           placeholder="Password"
           secureTextEntry={showPassword}
         />
+        {LoadingBar(isLoading)}
       </Forms>
     </ScrollView>
   );

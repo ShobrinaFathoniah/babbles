@@ -4,6 +4,7 @@ import {
   View,
   FlatList,
   Image,
+  RefreshControl,
 } from 'react-native';
 import React from 'react';
 import {KleeOne} from '../Fonts';
@@ -12,8 +13,9 @@ import {moderateScale} from 'react-native-size-matters';
 import {useDispatch} from 'react-redux';
 import {setChoosenUser} from '../../screens/Home/redux/action';
 
-const ListContacts = ({data}) => {
+const ListContacts = ({data, onRefresh, refreshing}) => {
   const dispatch = useDispatch();
+
   const onPress = payload => {
     dispatch(setChoosenUser(payload));
     navigate('RoomChat');
@@ -38,6 +40,9 @@ const ListContacts = ({data}) => {
         keyExtractor={(_item, index) => index}
         data={data}
         renderItem={listContact}
+        refreshControl={
+          <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+        }
       />
     </View>
   );
@@ -54,7 +59,8 @@ const styles = StyleSheet.create({
   listChatContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    margin: moderateScale(10),
+    margin: moderateScale(8),
+    padding: moderateScale(10),
   },
   textName: {
     color: COLORS.black,

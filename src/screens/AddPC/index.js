@@ -1,6 +1,6 @@
-import {View} from 'react-native';
+import {View, Alert} from 'react-native';
 import React, {useEffect, useCallback, useState} from 'react';
-import {Header, ListContacts} from '../../components';
+import {Header, ListContacts, LoadingBar} from '../../components';
 import {useDispatch, useSelector} from 'react-redux';
 import {myDb} from '../../helpers/db';
 import {setIsLoading} from '../../store/globalAction';
@@ -9,21 +9,30 @@ import {navigate} from '../../helpers';
 const AddPC = () => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
+  const [refreshing, setRefreshing] = useState(false);
   const {_user = {_id: ''}} = useSelector(state => state.user);
+  const {isLoading} = useSelector(state => state.global);
 
   const getAllData = useCallback(async () => {
     try {
+      dispatch(setIsLoading(true));
+
       const res = await myDb.ref(`/users/${_user._id}/contact`).once('value');
-      console.log(res, 'res-addPC');
       setData(res._snapshot.value);
     } catch (error) {
-      console.log(error);
+      Alert.alert('Notification', error);
     } finally {
       dispatch(setIsLoading(false));
+      setRefreshing(false);
     }
   }, [_user._id, dispatch]);
 
   const onPressButton = () => navigate('AddByUsername');
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    getAllData();
+  };
 
   useEffect(() => {
     getAllData();
@@ -32,7 +41,8 @@ const AddPC = () => {
   return (
     <View>
       <Header button={true} nameIcon="plus" onPressButton={onPressButton} />
-      <ListContacts data={data} />
+      {LoadingBar(isLoading)}
+      <ListContacts onRefresh={onRefresh} refreshing={refreshing} data={data} />
     </View>
   );
 };

@@ -1,6 +1,4 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import React from 'react';
 import {
   AddByUsername,
@@ -11,13 +9,13 @@ import {
   Login,
   MyProfile,
   Profile,
+  QRCode,
   Register,
   RoomChat,
   Settings,
 } from '../screens';
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
 
 const MainStack = () => {
   return (
@@ -77,43 +75,13 @@ const MainStack = () => {
         component={AddByUsername}
         options={{headerShown: false}}
       />
+      <Stack.Screen
+        name="QRCode"
+        component={QRCode}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };
-
-const MainApp = () => (
-  <Tab.Navigator screenOptions={{headerShown: false}} initialRouteName="Home">
-    <Tab.Screen
-      options={{
-        tabBarLabel: 'Home',
-        tabBarIcon: ({color, size}) => (
-          <AntDesign name="home" color={color} size={size} />
-        ),
-      }}
-      name="Home"
-      component={Home}
-    />
-    <Tab.Screen
-      options={{
-        tabBarLabel: 'MyProfile',
-        tabBarIcon: ({color, size}) => (
-          <AntDesign name="user" color={color} size={size} />
-        ),
-      }}
-      name="MyProfile"
-      component={MyProfile}
-    />
-    <Tab.Screen
-      options={{
-        tabBarLabel: 'Settings',
-        tabBarIcon: ({color, size}) => (
-          <AntDesign name="setting" color={color} size={size} />
-        ),
-      }}
-      name="Settings"
-      component={Settings}
-    />
-  </Tab.Navigator>
-);
 
 export default MainStack;

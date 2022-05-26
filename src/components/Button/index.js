@@ -10,7 +10,7 @@ const Button = ({onPress, text}) => {
       testID="button"
       style={{
         padding: moderateScale(10),
-        backgroundColor: COLORS.purple_100,
+        backgroundColor: COLORS.brown_300,
         borderRadius: moderateScale(5),
         marginHorizontal: moderateScale(5),
         height: moderateScale(40),

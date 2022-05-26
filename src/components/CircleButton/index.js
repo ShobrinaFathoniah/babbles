@@ -7,7 +7,7 @@ import {COLORS} from '../../helpers';
 const CircleButton = ({
   style,
   nameIcon,
-  color = COLORS.purple_500,
+  color = COLORS.brown_100,
   size = 20,
   onPress,
 }) => {
@@ -32,10 +32,10 @@ const styles = StyleSheet.create({
     height: moderateScale(40),
     width: moderateScale(40),
     borderRadius: moderateScale(100),
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.brown_700,
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: COLORS.purple_100,
+    borderColor: COLORS.brown_100,
     borderWidth: moderateScale(1),
   },
 });

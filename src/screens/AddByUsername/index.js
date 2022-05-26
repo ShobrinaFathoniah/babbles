@@ -4,26 +4,27 @@ import {moderateScale} from 'react-native-size-matters';
 import {COLORS, navigate} from '../../helpers';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {Input} from '../../components';
+import {Header, Input, LoadingBar} from '../../components';
 import {setIsLoading} from '../../store/globalAction';
 import {useDispatch, useSelector} from 'react-redux';
 import {myDb} from '../../helpers/db';
 import {KleeOne} from '../../components/Fonts';
 import {setChoosenUser} from '../Home/redux/action';
 
-const AddByUsername = () => {
+const AddByUsername = ({route}) => {
   const [search, setSearch] = useState('');
   const [dataSearch, setDataSearch] = useState([]);
+  const [buttonPlus, setButtonPlus] = useState(false);
   const {_user} = useSelector(state => state.user);
+  const {isLoading} = useSelector(state => state.global);
+  const idUser = route?.params?.idUser;
 
   const dispatch = useDispatch();
-  console.log(dataSearch.displayName, 'data');
 
   const getDataSearch = async searchUsername => {
     try {
       dispatch(setIsLoading(true));
       const results = await myDb.ref(`users/${searchUsername}`).once('value');
-      console.log(results.val(), 'res');
       setDataSearch(results.val());
       dispatch(setIsLoading(false));
     } catch (error) {
@@ -37,6 +38,7 @@ const AddByUsername = () => {
       setChoosenUser({
         _id: payload._id,
         displayName: payload.displayName,
+        notifToken: payload.notifToken,
         photoUrl: payload.photoURL,
         user: {
           _id: payload._id,
@@ -51,71 +53,86 @@ const AddByUsername = () => {
       .ref(`users/${_user._id}/contact`)
       .once('value');
 
-    if (listContact.val()) {
-      await myDb.ref(`users/${_user._id}`).update({
-        contact: [
-          ...listContact.val(),
-          {
-            _id: payload._id,
-            displayName: payload.displayName,
-            photoUrl: payload.photoURL,
-            user: {
-              _id: payload._id,
-            },
-          },
-        ],
-      });
-    } else {
-      await myDb.ref(`users/${_user._id}`).update({
-        contact: [
-          {
-            _id: payload._id,
-            displayName: payload.displayName,
-            photoUrl: payload.photoURL,
-            user: {
-              _id: payload._id,
-            },
-          },
-        ],
-      });
-    }
-
     const listContact2 = await myDb
       .ref(`users/${payload._id}/contact`)
       .once('value');
 
-    if (listContact2.val()) {
-      await myDb.ref(`users/${payload._id}`).update({
-        contact: [
-          ...listContact2.val(),
-          {
-            _id: _user._id,
-            displayName: _user.displayName,
-            photoUrl: _user.photoURL,
-            user: {
-              _id: _user._id,
-            },
-          },
-        ],
-      });
+    if (buttonPlus) {
+      setButtonPlus(false);
+      await myDb.ref(`users/${_user._id}/contact/_id/${payload._id}`).remove();
+      await myDb.ref(`users/${payload._id}/contact/_id/${_user._id}`).remove();
     } else {
-      await myDb.ref(`users/${payload._id}`).update({
-        contact: [
-          {
-            _id: _user._id,
-            displayName: _user.displayName,
-            photoUrl: _user.photoURL,
-            user: {
-              _id: _user._id,
+      setButtonPlus(true);
+
+      if (listContact.val()) {
+        await myDb.ref(`users/${_user._id}`).update({
+          contact: [
+            ...listContact.val(),
+            {
+              _id: payload._id,
+              displayName: payload.displayName,
+              photoUrl: payload.photoURL,
+              notifToken: payload.notifToken,
+              user: {
+                _id: payload._id,
+              },
             },
-          },
-        ],
-      });
+          ],
+        });
+      } else {
+        await myDb.ref(`users/${_user._id}`).update({
+          contact: [
+            {
+              _id: payload._id,
+              notifToken: payload.notifToken,
+              displayName: payload.displayName,
+              photoUrl: payload.photoURL,
+              user: {
+                _id: payload._id,
+              },
+            },
+          ],
+        });
+      }
+
+      if (listContact2.val()) {
+        await myDb.ref(`users/${payload._id}`).update({
+          contact: [
+            ...listContact2.val(),
+            {
+              _id: _user._id,
+              displayName: _user.displayName,
+              notifToken: _user.notifToken,
+              photoUrl: _user.photoURL,
+              user: {
+                _id: _user._id,
+              },
+            },
+          ],
+        });
+      } else {
+        await myDb.ref(`users/${payload._id}`).update({
+          contact: [
+            {
+              _id: _user._id,
+              displayName: _user.displayName,
+              notifToken: _user.notifToken,
+              photoUrl: _user.photoURL,
+              user: {
+                _id: _user._id,
+              },
+            },
+          ],
+        });
+      }
     }
   };
 
+  const goToQrCode = () => navigate('QRCode');
+
   return (
     <View>
+      <Header button={true} nameIcon="qrcode" onPressButton={goToQrCode} />
       <View style={styles.searchBar}>
         <Ionicons
           style={styles.searchIcon}
@@ -126,33 +143,40 @@ const AddByUsername = () => {
         <Input
           style={styles.input}
           onChangeText={value => {
-            setSearch(value);
+            value ? setSearch(value) : setSearch(idUser);
           }}
-          value={search}
-          onSubmitEditing={() => getDataSearch(search)}
-          placeholder="Write in Here"
+          value={search ? search : idUser}
+          onSubmitEditing={() =>
+            search ? getDataSearch(search) : getDataSearch(idUser)
+          }
+          placeholder="Search in Here"
         />
       </View>
-      <View style={styles.containerContact}>
-        <TouchableOpacity
-          style={styles.addContactButton}
-          onPress={() => addFriend(dataSearch)}>
-          <AntDesign
-            style={styles.searchIcon}
-            name="plus"
-            size={30}
-            color={COLORS.brown_500}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.listChatContainer}
-          onPress={() => onPress(dataSearch)}>
-          <Image source={{uri: dataSearch.photoURL}} style={styles.image} />
-          <View style={styles.textContainer}>
-            <KleeOne style={styles.textName}>{dataSearch.displayName}</KleeOne>
-          </View>
-        </TouchableOpacity>
-      </View>
+      {LoadingBar(isLoading)}
+      {dataSearch?.displayName?.length > 0 ? (
+        <View style={styles.containerContact}>
+          <TouchableOpacity
+            style={styles.addContactButton}
+            onPress={() => addFriend(dataSearch)}>
+            <AntDesign
+              style={styles.searchIcon}
+              name={!buttonPlus ? 'plus' : 'minus'}
+              size={30}
+              color={COLORS.brown_500}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.listChatContainer}
+            onPress={() => onPress(dataSearch)}>
+            <Image source={{uri: dataSearch.photoURL}} style={styles.image} />
+            <View style={styles.textContainer}>
+              <KleeOne style={styles.textName}>
+                {dataSearch.displayName}
+              </KleeOne>
+            </View>
+          </TouchableOpacity>
+        </View>
+      ) : null}
     </View>
   );
 };
@@ -165,7 +189,7 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(3),
     flexDirection: 'row',
     alignSelf: 'center',
-    marginTop: moderateScale(5),
+    marginTop: moderateScale(25),
   },
   input: {
     backgroundColor: COLORS.brown_100,
@@ -176,6 +200,7 @@ const styles = StyleSheet.create({
   searchIcon: {
     alignItems: 'center',
     marginTop: moderateScale(7),
+    marginEnd: moderateScale(10),
   },
   image: {
     width: moderateScale(45),
@@ -195,8 +220,10 @@ const styles = StyleSheet.create({
   },
   addContactButton: {
     alignItems: 'center',
+    marginVertical: moderateScale(10),
   },
   containerContact: {
     flexDirection: 'row',
+    marginHorizontal: moderateScale(15),
   },
 });

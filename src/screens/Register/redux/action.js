@@ -38,6 +38,7 @@ export const sendDataRegister = (name, email, password) => async dispatch => {
         await myDb.ref(`users/${res.user.uid}`).set(payload);
         dispatch(setDataUser(payload));
         navigate('Home');
+        dispatch(setIsLoading(false));
       }
     }
   } catch (error) {
