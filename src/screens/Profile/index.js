@@ -8,6 +8,7 @@ import {LibreBaskerville} from '../../components/Fonts';
 import {Header} from '../../components';
 import QRCode from 'react-native-qrcode-svg';
 import {logo} from '../../assets';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const Profile = () => {
   const isFocused = useIsFocused();
@@ -27,13 +28,26 @@ const Profile = () => {
   return (
     <View>
       <Header />
-      <Image source={{uri: selectedUser.photoUrl}} style={styles.image} />
-      <LibreBaskerville style={styles.textName}>
-        {selectedUser.displayName}
-      </LibreBaskerville>
-      <TouchableOpacity onPress={seeQrCode}>
-        <LibreBaskerville style={styles.textQrCode}>QR Code</LibreBaskerville>
-      </TouchableOpacity>
+      <View style={styles.containerAllBio}>
+        <Image source={{uri: selectedUser.photoUrl}} style={styles.image} />
+        <View style={styles.containerBio}>
+          <LibreBaskerville style={styles.textName}>
+            {selectedUser.displayName}
+          </LibreBaskerville>
+          <LibreBaskerville style={styles.text}>
+            {selectedUser.bio ? selectedUser.bio : 'Available'}
+          </LibreBaskerville>
+          <TouchableOpacity onPress={seeQrCode}>
+            <AntDesign
+              style={styles.qrCodeButton}
+              name="qrcode"
+              size={30}
+              color={COLORS.brown_500}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+
       {qrCode ? (
         <View style={styles.qrCode}>
           <QRCode
@@ -55,20 +69,26 @@ const styles = StyleSheet.create({
   image: {
     width: moderateScale(150),
     height: moderateScale(150),
-    alignSelf: 'center',
-    margin: moderateScale(30),
+    marginVertical: moderateScale(30),
+    marginHorizontal: moderateScale(10),
     borderRadius: moderateScale(10),
   },
   textName: {
     color: COLORS.black,
-    alignSelf: 'center',
     fontSize: moderateScale(17),
   },
-  textQrCode: {
+  text: {
     color: COLORS.black,
-    margin: moderateScale(10),
+    marginTop: moderateScale(10),
   },
   qrCode: {
     alignSelf: 'center',
+  },
+  containerAllBio: {
+    flexDirection: 'row',
+  },
+  containerBio: {alignSelf: 'center', justifyContent: 'flex-start', flex: 1},
+  qrCodeButton: {
+    marginVertical: moderateScale(10),
   },
 });

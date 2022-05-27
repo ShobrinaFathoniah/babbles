@@ -29,6 +29,9 @@ const ListContacts = ({data, onRefresh, refreshing}) => {
         <Image source={{uri: item.photoUrl}} style={styles.image} />
         <View style={styles.textContainer}>
           <KleeOne style={styles.textName}>{item.displayName}</KleeOne>
+          <KleeOne style={styles.textName}>
+            {item.bio ? item.bio : 'Available'}
+          </KleeOne>
         </View>
       </TouchableOpacity>
     );

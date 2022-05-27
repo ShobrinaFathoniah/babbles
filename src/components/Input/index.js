@@ -17,13 +17,14 @@ const Input = ({
   iconSize = 20,
   keyboardType,
   onIconPress,
+  alignSelfInput = 'center',
 }) => {
   const passedStyles = Array.isArray(style)
     ? Object.assign({}, ...style)
     : style;
 
   return (
-    <View style={styles.containerInput}>
+    <View style={[styles.containerInput, {alignSelf: alignSelfInput}]}>
       <View style={styles.containerIcon}>
         {iconName ? (
           <Entypo
@@ -66,7 +67,6 @@ const styles = StyleSheet.create({
   containerInput: {
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'center',
   },
   containerIcon: {
     marginEnd: moderateScale(5),

@@ -19,8 +19,12 @@ export default function MyMenu({menuName1, menuName2, clearingChat}) {
   };
 
   const hideMenu2 = () => {
-    setVisible(false);
-    navigate(menuName2);
+    if (menuName2 === 'Clear Chat') {
+      clearChat();
+    } else {
+      navigate(menuName2);
+      setVisible(false);
+    }
   };
 
   const cancelMenu = () => {

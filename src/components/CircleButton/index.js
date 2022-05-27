@@ -10,10 +10,25 @@ const CircleButton = ({
   color = COLORS.brown_100,
   size = 20,
   onPress,
+  backgroundColor = COLORS.brown_700,
+  borderColor = COLORS.brown_100,
 }) => {
   const passedStyles = Array.isArray(style)
     ? Object.assign({}, ...style)
     : style;
+
+  const styles = StyleSheet.create({
+    circle: {
+      height: moderateScale(40),
+      width: moderateScale(40),
+      borderRadius: moderateScale(100),
+      backgroundColor: backgroundColor,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderColor: borderColor,
+      borderWidth: moderateScale(1),
+    },
+  });
 
   return (
     <TouchableOpacity
@@ -26,16 +41,3 @@ const CircleButton = ({
 };
 
 export default CircleButton;
-
-const styles = StyleSheet.create({
-  circle: {
-    height: moderateScale(40),
-    width: moderateScale(40),
-    borderRadius: moderateScale(100),
-    backgroundColor: COLORS.brown_700,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderColor: COLORS.brown_100,
-    borderWidth: moderateScale(1),
-  },
-});

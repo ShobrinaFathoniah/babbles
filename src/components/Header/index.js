@@ -11,6 +11,9 @@ const Header = ({
   onPressButton,
   radiusBottom = false,
   text = 'babbles',
+  color,
+  size,
+  backgroundColor,
 }) => {
   const styles = StyleSheet.create({
     page: {
@@ -41,6 +44,9 @@ const Header = ({
           style={styles.button}
           nameIcon={nameIcon}
           onPress={onPressButton}
+          backgroundColor={backgroundColor}
+          color={color}
+          size={size}
         />
       ) : null}
     </View>

@@ -1,10 +1,13 @@
-import {View, Alert} from 'react-native';
+import {View, Alert, Image, ScrollView, RefreshControl} from 'react-native';
 import React, {useEffect, useCallback, useState} from 'react';
 import {Header, ListContacts, LoadingBar} from '../../components';
 import {useDispatch, useSelector} from 'react-redux';
 import {myDb} from '../../helpers/db';
 import {setIsLoading} from '../../store/globalAction';
-import {navigate} from '../../helpers';
+import {COLORS, navigate} from '../../helpers';
+import {LibreBaskerville} from '../../components/Fonts';
+import {ohNo} from '../../assets';
+import {styles} from '../Home/styles';
 
 const AddPC = () => {
   const [data, setData] = useState([]);
@@ -40,9 +43,33 @@ const AddPC = () => {
 
   return (
     <View>
-      <Header button={true} nameIcon="plus" onPressButton={onPressButton} />
+      <Header
+        button={true}
+        backgroundColor={COLORS.brown_100}
+        size={35}
+        color={COLORS.brown_800}
+        nameIcon="plus"
+        onPressButton={onPressButton}
+      />
       {LoadingBar(isLoading)}
-      <ListContacts onRefresh={onRefresh} refreshing={refreshing} data={data} />
+      {data.length > 0 ? (
+        <ListContacts
+          onRefresh={onRefresh}
+          refreshing={refreshing}
+          data={data}
+        />
+      ) : (
+        <ScrollView
+          refreshControl={
+            <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+          }>
+          <Image source={ohNo} style={styles.imageNo} />
+          <LibreBaskerville style={styles.text}>
+            You Don't Have Any Contact! Please Add Your Friend or Refresh The
+            Page!
+          </LibreBaskerville>
+        </ScrollView>
+      )}
     </View>
   );
 };

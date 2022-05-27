@@ -40,6 +40,7 @@ const AddByUsername = ({route}) => {
         displayName: payload.displayName,
         notifToken: payload.notifToken,
         photoUrl: payload.photoURL,
+        bio: payload.bio,
         user: {
           _id: payload._id,
         },
@@ -72,6 +73,7 @@ const AddByUsername = ({route}) => {
               _id: payload._id,
               displayName: payload.displayName,
               photoUrl: payload.photoURL,
+              bio: payload.bio,
               notifToken: payload.notifToken,
               user: {
                 _id: payload._id,
@@ -85,6 +87,7 @@ const AddByUsername = ({route}) => {
             {
               _id: payload._id,
               notifToken: payload.notifToken,
+              bio: payload.bio,
               displayName: payload.displayName,
               photoUrl: payload.photoURL,
               user: {
@@ -102,6 +105,7 @@ const AddByUsername = ({route}) => {
             {
               _id: _user._id,
               displayName: _user.displayName,
+              bio: _user.bio,
               notifToken: _user.notifToken,
               photoUrl: _user.photoURL,
               user: {
@@ -116,6 +120,7 @@ const AddByUsername = ({route}) => {
             {
               _id: _user._id,
               displayName: _user.displayName,
+              bio: _user.bio,
               notifToken: _user.notifToken,
               photoUrl: _user.photoURL,
               user: {
@@ -132,14 +137,15 @@ const AddByUsername = ({route}) => {
 
   return (
     <View>
-      <Header button={true} nameIcon="qrcode" onPressButton={goToQrCode} />
+      <Header
+        button={true}
+        nameIcon="qrcode"
+        backgroundColor={COLORS.brown_100}
+        size={35}
+        color={COLORS.brown_800}
+        onPressButton={goToQrCode}
+      />
       <View style={styles.searchBar}>
-        <Ionicons
-          style={styles.searchIcon}
-          name="search"
-          size={30}
-          color={COLORS.brown_500}
-        />
         <Input
           style={styles.input}
           onChangeText={value => {
@@ -151,6 +157,18 @@ const AddByUsername = ({route}) => {
           }
           placeholder="Search in Here"
         />
+
+        <TouchableOpacity
+          onPress={() =>
+            search ? getDataSearch(search) : getDataSearch(idUser)
+          }>
+          <Ionicons
+            style={styles.searchIcon}
+            name="search"
+            size={30}
+            color={COLORS.brown_500}
+          />
+        </TouchableOpacity>
       </View>
       {LoadingBar(isLoading)}
       {dataSearch?.displayName?.length > 0 ? (
@@ -200,7 +218,7 @@ const styles = StyleSheet.create({
   searchIcon: {
     alignItems: 'center',
     marginTop: moderateScale(7),
-    marginEnd: moderateScale(10),
+    marginStart: moderateScale(10),
   },
   image: {
     width: moderateScale(45),

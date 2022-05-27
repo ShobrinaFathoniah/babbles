@@ -28,6 +28,10 @@ export const styles = StyleSheet.create({
   },
   textName: {
     color: COLORS.black,
+    fontSize: moderateScale(15),
+  },
+  textBio: {
+    color: COLORS.black,
   },
   textContainer: {
     marginStart: moderateScale(10),

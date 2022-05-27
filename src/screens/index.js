@@ -1,6 +1,5 @@
 import GroupChat from './GroupChat';
 import Home from './Home';
-import ListKontak from './ListKontak';
 import Login from './Login';
 import MyProfile from './MyProfile';
 import Profile from './Profile';
@@ -14,7 +13,6 @@ import QRCode from './QRCode';
 export {
   GroupChat,
   Home,
-  ListKontak,
   Login,
   MyProfile,
   Profile,

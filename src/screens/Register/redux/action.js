@@ -34,6 +34,7 @@ export const sendDataRegister = (name, email, password) => async dispatch => {
           contact: '',
           _id: res.user.uid,
           notifToken: token,
+          bio: 'Available',
         };
         await myDb.ref(`users/${res.user.uid}`).set(payload);
         dispatch(setDataUser(payload));

@@ -1390,6 +1390,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-14.9.4.tgz#991a75ea4c9b7f5613d13aebe91c5d280dac82e6"
   integrity sha512-wc8XAIorjRVOqM09qeGy+ElJSLllNtfOZbr3vn3j7UCrPW7XbQlSgYq70Fi2WKP6uaY7YlwRnp+7qKl9G5SEQw==
 
+"@react-native-firebase/storage@^14.10.1":
+  version "14.10.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/storage/-/storage-14.10.1.tgz#2313b7f061bb2ce6e300f892107d9b830947d7b7"
+  integrity sha512-mgma2htePwpOxj7YUlVI24kHBdHHt4XMNTUW8dfQ52atIqe67DhCbkTSbs4TpW0PftZ/wyjtgwBLraxeic7IqQ==
+
 "@react-native-masked-view/masked-view@^0.2.6":
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/@react-native-masked-view/masked-view/-/masked-view-0.2.6.tgz#b26c52d5db3ad0926b13deea79c69620966a9221"
@@ -7374,6 +7379,11 @@ react-native-dotenv@^3.3.1:
   dependencies:
     dotenv "^10.0.0"
 
+react-native-fast-image@^8.5.11:
+  version "8.5.11"
+  resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-8.5.11.tgz#e3dc969d0e4e8df026646bf18194465aa55cbc2b"
+  integrity sha512-cNW4bIJg3nvKaheG8vGMfqCt5LMWX9MS5+wMudgKIHbGO51spRr4sgnlhVgwHLcZ5aeNOVJ8CPRxDIWKRq/0QA==
+
 react-native-floating-action@^1.22.0:
   version "1.22.0"
   resolved "https://registry.yarnpkg.com/react-native-floating-action/-/react-native-floating-action-1.22.0.tgz#7ec476f320e16855ad4077a3a9f36511d1718a52"
@@ -7409,6 +7419,11 @@ react-native-gradle-plugin@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.0.6.tgz#b61a9234ad2f61430937911003cddd7e15c72b45"
   integrity sha512-eIlgtsmDp1jLC24dRn43hB3kEcZVqx6DUQbR0N1ABXGnMEafm9I3V3dUUeD1vh+Dy5WqijSoEwLNUPLgu5zDMg==
+
+react-native-image-modal@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-image-modal/-/react-native-image-modal-2.0.4.tgz#c3cbfad43d0dd33a2f106b1f5688d96c4900b82c"
+  integrity sha512-BTHOUAznjAHStrxg2D3k6R/3YPXMos2w6jZv5LdOR6xY2vHVHgMnSbjeszq882brbge51ZjS06FCi8sM6WNwxg==
 
 react-native-image-picker@^4.8.3:
   version "4.8.3"

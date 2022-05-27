@@ -5,7 +5,6 @@ import {
   AddPC,
   GroupChat,
   Home,
-  ListKontak,
   Login,
   MyProfile,
   Profile,
@@ -38,11 +37,6 @@ const MainStack = () => {
       <Stack.Screen
         name="GroupChat"
         component={GroupChat}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="ListKontak"
-        component={ListKontak}
         options={{headerShown: false}}
       />
       <Stack.Screen

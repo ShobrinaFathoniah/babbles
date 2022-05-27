@@ -1,18 +1,22 @@
-import {View} from 'react-native';
+import {View, Image} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {COLORS, focusedScreen, navigate} from '../../helpers';
 import {Actions, GiftedChat} from 'react-native-gifted-chat';
 import {styles} from './styles';
-import {MyMenu} from '../../components';
+import {CircleButton, MyMenu} from '../../components';
 import {myDb} from '../../helpers/db';
 import {useSelector} from 'react-redux';
 import axios from 'axios';
 import {fcmUrl, FIREBASE_API_KEY} from '../../helpers/apiURL';
 import {generateId} from '../../helpers/generateId';
 import {launchImageLibrary} from 'react-native-image-picker';
+import storage from '@react-native-firebase/storage';
+import {KleeOne} from '../../components/Fonts';
+import {ohNo} from '../../assets';
+import ImageModal from 'react-native-image-modal';
 
-const RoomChat = () => {
+const RoomChat = ({navigation}) => {
   const isFocused = useIsFocused();
   focusedScreen(isFocused, 'RoomChat');
 
@@ -122,14 +126,33 @@ const RoomChat = () => {
     const options = {
       mediaType: 'photo',
     };
-    return (
+    return urlImage ? (
+      <Image source={{uri: urlImage}} style={styles.imagePreview} />
+    ) : (
       <Actions
         {...props}
         options={{
           ['Image']: async () => {
             try {
               const result = await launchImageLibrary(options);
-              setUrlImage(result.assets[0].uri);
+              const reference = storage().ref(
+                `chatFile/${generateId(_user._id, selectedUser.user._id)}/${
+                  result.assets[0].fileName
+                }`,
+              );
+
+              const pathToFile = result.assets[0].uri;
+              await reference.putFile(pathToFile);
+
+              const url = await storage()
+                .ref(
+                  `chatFile/${generateId(_user._id, selectedUser.user._id)}/${
+                    result.assets[0].fileName
+                  }`,
+                )
+                .getDownloadURL();
+
+              setUrlImage(url);
             } catch (err) {
               console.log(err);
             }
@@ -142,33 +165,66 @@ const RoomChat = () => {
     );
   };
 
+  const renderChatEmpty = () => {
+    return (
+      <View style={styles.containerEmptyChat}>
+        <Image source={ohNo} style={styles.imageNoChat} />
+        <KleeOne style={styles.textEmptyChat}>Say Hello!</KleeOne>
+      </View>
+    );
+  };
+
+  const renderMessageImage = props => {
+    return (
+      <View style={styles.imageModal}>
+        <ImageModal
+          resizeMode="cover"
+          style={styles.imageMessage}
+          source={{uri: props.currentMessage.image}}
+        />
+      </View>
+    );
+  };
+
+  const onPressBackButton = () => navigation.goBack();
+
   return (
     <View style={styles.container}>
       <View style={styles.menuContainer}>
+        <CircleButton
+          nameIcon="arrowleft"
+          backgroundColor={COLORS.brown_100}
+          color={COLORS.brown_800}
+          size={25}
+          onPress={onPressBackButton}
+        />
+        <KleeOne style={styles.textName}>{selectedUser.displayName}</KleeOne>
         <MyMenu
-          menuName1="Clear Chat"
-          menuName2="Profile"
+          menuName1="Profile"
+          menuName2="Clear Chat"
           clearingChat={clearChat}
         />
       </View>
       <GiftedChat
-        renderActions={() => renderActions()}
+        renderActions={renderActions}
         messages={roomChat?.chat?.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         })}
         onSend={sendedMessage => {
           onSend(sendedMessage);
         }}
-        optionTintColor="red"
+        optionTintColor={COLORS.brown_500}
         user={{
           _id: _user._id,
           name: _user.displayName,
           avatar:
-            _user.photoUrl ??
+            _user.photoURL ??
             'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
         }}
         messagesContainerStyle={{backgroundColor: COLORS.white}}
         onPressAvatar={goToProfile}
+        renderChatEmpty={renderChatEmpty}
+        renderMessageImage={renderMessageImage}
       />
     </View>
   );

@@ -8,7 +8,7 @@ import {FloatingAction} from 'react-native-floating-action';
 import {useDispatch, useSelector} from 'react-redux';
 import {setChoosenUser} from './redux/action';
 import {KleeOne} from '../../components/Fonts';
-import {ohNo} from '../../assets';
+import {addFriend, addGroupFriend, ohNo} from '../../assets';
 
 const Home = () => {
   const isFocused = useIsFocused();
@@ -25,6 +25,7 @@ const Home = () => {
         _id: payload._id,
         displayName: payload.displayName,
         photoUrl: payload.photoUrl,
+        bio: payload.bio,
         notifToken: payload.notifToken,
         user: {
           _id: payload._id,
@@ -37,13 +38,13 @@ const Home = () => {
   const actions = [
     {
       text: 'Personal Chat',
-      icon: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+      icon: addFriend,
       name: 'AddPC',
       position: 1,
     },
     {
       text: 'Group Chat',
-      icon: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+      icon: addGroupFriend,
       name: 'AddGC',
       position: 2,
     },
@@ -64,6 +65,9 @@ const Home = () => {
             <View style={styles.textContainer}>
               <KleeOne style={styles.textName}>
                 {selectedUser.displayName}
+              </KleeOne>
+              <KleeOne style={styles.textBio}>
+                {selectedUser.bio ? selectedUser.bio : 'Available'}
               </KleeOne>
             </View>
           </TouchableOpacity>
