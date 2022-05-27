@@ -14,14 +14,12 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import {myDb} from '../../helpers/db';
-import {setIsLoading} from '../../store/globalAction';
 
 export default function MyProfile() {
   const isFocused = useIsFocused();
   focusedScreen(isFocused, 'MyProfile');
 
   const {_user} = useSelector(state => state.user);
-  const [urlImage, setUrlImage] = useState('');
   const [bio, setBio] = useState(_user.bio);
   const [changeBio, setChangeBio] = useState(false);
   const [qrCode, setQrCode] = useState(false);
@@ -43,8 +41,6 @@ export default function MyProfile() {
   };
 
   const changePhotoProfile = async () => {
-    dispatch(setIsLoading(true));
-
     const options = {
       mediaType: 'photo',
     };
@@ -56,31 +52,29 @@ export default function MyProfile() {
     );
 
     const pathToFile = result.assets[0].uri;
-    // uploads file
     await reference.putFile(pathToFile);
 
     const url = await storage()
       .ref(`profileImage/${_user._id}/${result.assets[0].fileName}`)
       .getDownloadURL();
 
-    setUrlImage(url);
-    changingPhoto();
+    if (url) {
+      changingPhoto(url);
+    }
+    console.log(url);
   };
 
-  const changingPhoto = async () => {
+  const changingPhoto = async url => {
     let isUpdate = false;
     await myDb.ref(`users/${_user._id}`).update({
-      photoURL: urlImage,
+      photoURL: url,
     });
     isUpdate = true;
-
-    console.log(urlImage);
 
     if (isUpdate) {
       const results = await myDb.ref(`users/${_user._id}`).once('value');
       console.log(results);
       if (results.val()) {
-        dispatch(setIsLoading(false));
         dispatch(setDataUser(results.val()));
       }
     }
@@ -107,7 +101,6 @@ export default function MyProfile() {
       const results = await myDb.ref(`users/${_user._id}`).once('value');
       console.log(results);
       if (results.val()) {
-        dispatch(setIsLoading(false));
         dispatch(setDataUser(results.val()));
         setChangeBio(false);
       }
