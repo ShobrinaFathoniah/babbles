@@ -25,6 +25,7 @@ const AddByUsername = ({route}) => {
     try {
       dispatch(setIsLoading(true));
       const results = await myDb.ref(`users/${searchUsername}`).once('value');
+      //pk state
       setDataSearch(results.val());
       dispatch(setIsLoading(false));
     } catch (error) {

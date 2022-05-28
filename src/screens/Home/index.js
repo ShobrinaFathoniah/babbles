@@ -1,14 +1,14 @@
 import {View, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import {useIsFocused} from '@react-navigation/native';
-import {focusedScreen, navigate} from '../../helpers';
+import {COLORS, focusedScreen, navigate} from '../../helpers';
 import {MyMenu} from '../../components';
 import {styles} from './styles';
 import {FloatingAction} from 'react-native-floating-action';
 import {useDispatch, useSelector} from 'react-redux';
 import {setChoosenUser} from './redux/action';
 import {KleeOne} from '../../components/Fonts';
-import {addFriend, addGroupFriend, ohNo} from '../../assets';
+import {addFriend, addGroupFriend, chat, ohNo} from '../../assets';
 
 const Home = () => {
   const isFocused = useIsFocused();
@@ -41,12 +41,14 @@ const Home = () => {
       icon: addFriend,
       name: 'AddPC',
       position: 1,
+      color: COLORS.brown_100,
     },
     {
       text: 'Group Chat',
       icon: addGroupFriend,
       name: 'AddGC',
       position: 2,
+      color: COLORS.brown_100,
     },
   ];
 
@@ -87,6 +89,11 @@ const Home = () => {
           onPressItem={name => {
             navigate(name);
           }}
+          floatingIcon={chat}
+          color={COLORS.brown_100}
+          tintColor={COLORS.white}
+          iconHeight={19}
+          iconWidth={19}
         />
       </View>
     </View>

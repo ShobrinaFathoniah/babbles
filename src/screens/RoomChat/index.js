@@ -1,4 +1,4 @@
-import {View, Image} from 'react-native';
+import {View, Image, Alert} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {COLORS, focusedScreen, navigate} from '../../helpers';
@@ -109,7 +109,22 @@ const RoomChat = ({navigation}) => {
     ],
   );
 
-  const clearChat = async () => {
+  const clearChat = () => {
+    Alert.alert('Hold on!', 'Do you want to clear chat?', [
+      {
+        text: 'Cancel',
+        onPress: () => null,
+      },
+      {
+        text: 'YES',
+        onPress: () => {
+          deleteChat();
+        },
+      },
+    ]);
+  };
+
+  const deleteChat = async () => {
     await myDb
       .ref(
         `roomChat/personalChat/${generateId(

@@ -5,6 +5,7 @@ import logo from './babbles-logo.png';
 import ohNo from './speech-bubble.png'; //https://www.flaticon.com/free-sticker/speech-bubble_5175282?term=chat&page=1&position=18&page=1&position=18&related_id=5175282&origin=search
 import addFriend from './add-friend.png';
 import addGroupFriend from './add-groupfriend.png';
+import chat from './chat.png';
 
 export {
   registerPic,
@@ -14,4 +15,5 @@ export {
   ohNo,
   addFriend,
   addGroupFriend,
+  chat,
 };
