@@ -55,4 +55,10 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     margin: moderateScale(20),
   },
+  animationContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    marginTop: moderateScale(50),
+  },
 });

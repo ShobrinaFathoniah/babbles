@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">babbles</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">1X1H8hnKb_1HKRz98OKhiz5PplTGscIAW4i1F</string>
 </resources>

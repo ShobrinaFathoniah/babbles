@@ -39,6 +39,7 @@
     "react-native": "0.68.2",
     "react-native-android-location-enabler": "^1.2.2",
     "react-native-camera-kit": "^12.1.0",
+    "react-native-code-push": "^7.0.4",
     "react-native-dotenv": "^3.3.1",
     "react-native-fast-image": "^8.5.11",
     "react-native-floating-action": "^1.22.0",

@@ -1,5 +1,11 @@
-import {View, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  Animated,
+  StyleSheet,
+} from 'react-native';
+import React, {useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {COLORS, focusedScreen, navigate} from '../../helpers';
 import {MyMenu} from '../../components';
@@ -7,17 +13,53 @@ import {styles} from './styles';
 import {FloatingAction} from 'react-native-floating-action';
 import {useDispatch, useSelector} from 'react-redux';
 import {setChoosenUser} from './redux/action';
-import {KleeOne} from '../../components/Fonts';
+import {KleeOne, LibreBaskerville} from '../../components/Fonts';
 import {addFriend, addGroupFriend, chat, ohNo} from '../../assets';
+import {Easing} from 'react-native-reanimated';
 
 const Home = () => {
   const isFocused = useIsFocused();
+  const leftValue = useState(new Animated.Value(0))[0];
   focusedScreen(isFocused, 'Home');
 
   const dispatch = useDispatch();
   const {selectedUser = {_id: '', displayName: ''}} = useSelector(
     state => state.user,
   );
+
+  const style = StyleSheet.create({
+    animationBall: {
+      borderRadius: 100 / 2,
+      width: 50,
+      height: 50,
+      backgroundColor: COLORS.red_500,
+      marginLeft: leftValue,
+    },
+  });
+
+  const moveBall = () => {
+    Animated.timing(leftValue, {
+      toValue: 1000,
+      duration: 1000,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const moveBallWithBack = () => {
+    Animated.timing(leftValue, {
+      toValue: 1000,
+      duration: 1000,
+      useNativeDriver: false,
+      easing: Easing.back(),
+    }).start();
+  };
+
+  const moveWithSpringBall = () => {
+    Animated.timing(leftValue, {
+      toValue: 300,
+      useNativeDriver: false,
+    }).start();
+  };
 
   const onPress = payload => {
     dispatch(
@@ -80,6 +122,12 @@ const Home = () => {
           <KleeOne style={styles.text}>
             You Haven't Seen Any Chat, Let's Start Making a Chat!
           </KleeOne>
+          <View style={styles.animationContainer}>
+            <Animated.View style={style.animationBall} />
+            <TouchableOpacity onPress={moveBall}>
+              <LibreBaskerville>Move Me!</LibreBaskerville>
+            </TouchableOpacity>
+          </View>
         </View>
       )}
 
