@@ -5,21 +5,23 @@ import {
   Animated,
   StyleSheet,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useMemo} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {COLORS, focusedScreen, navigate} from '../../helpers';
-import {MyMenu} from '../../components';
+import {MyMenu, Input} from '../../components';
 import {styles} from './styles';
 import {FloatingAction} from 'react-native-floating-action';
 import {useDispatch, useSelector} from 'react-redux';
 import {setChoosenUser} from './redux/action';
 import {KleeOne, LibreBaskerville} from '../../components/Fonts';
 import {addFriend, addGroupFriend, chat, ohNo} from '../../assets';
-import {Easing} from 'react-native-reanimated';
+// import {Easing} from 'react-native-reanimated';
 
 const Home = () => {
   const isFocused = useIsFocused();
   const leftValue = useState(new Animated.Value(0))[0];
+  const [number, setNumber] = useState(0);
+  const [dark, setDark] = useState(false);
   focusedScreen(isFocused, 'Home');
 
   const dispatch = useDispatch();
@@ -45,21 +47,21 @@ const Home = () => {
     }).start();
   };
 
-  const moveBallWithBack = () => {
-    Animated.timing(leftValue, {
-      toValue: 1000,
-      duration: 1000,
-      useNativeDriver: false,
-      easing: Easing.back(),
-    }).start();
-  };
+  // const moveBallWithBack = () => {
+  //   Animated.timing(leftValue, {
+  //     toValue: 1000,
+  //     duration: 1000,
+  //     useNativeDriver: false,
+  //     easing: Easing.back(),
+  //   }).start();
+  // };
 
-  const moveWithSpringBall = () => {
-    Animated.timing(leftValue, {
-      toValue: 300,
-      useNativeDriver: false,
-    }).start();
-  };
+  // const moveWithSpringBall = () => {
+  //   Animated.timing(leftValue, {
+  //     toValue: 300,
+  //     useNativeDriver: false,
+  //   }).start();
+  // };
 
   const onPress = payload => {
     dispatch(
@@ -93,6 +95,21 @@ const Home = () => {
       color: COLORS.brown_100,
     },
   ];
+
+  const themeStyles = {
+    backgroundColor: dark ? 'black' : 'white',
+    color: dark ? 'white' : 'dark',
+  };
+
+  const slowFunction = num => {
+    console.log('slow function trigger');
+    for (let i = 0; i <= 10000000000000; i++) {}
+    return num * 2;
+  };
+
+  const doubleNumber = useMemo(() => {
+    return slowFunction(number);
+  }, [number]);
 
   return (
     <View style={styles.container}>
@@ -130,6 +147,20 @@ const Home = () => {
           </View>
         </View>
       )}
+
+      <View>
+        <Input
+          value={number}
+          keyboardType="numeric"
+          onChangeText={e => setNumber(parseInt(e, 10))}
+        />
+        <TouchableOpacity onPress={() => setDark(!dark)}>
+          <LibreBaskerville>Change Theme</LibreBaskerville>
+        </TouchableOpacity>
+        <View style={themeStyles}>
+          <LibreBaskerville>{doubleNumber}</LibreBaskerville>
+        </View>
+      </View>
 
       <View style={styles.floatingIcon}>
         <FloatingAction
